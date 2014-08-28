@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for blue-button/lib/generator/ccda/generator.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">blue-button/lib/generator/ccda/generator.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">17.65% <small>(9 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 32)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">17.65% <small>(9 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">blue-button/lib/generator/ccda/</a> &#187; generator.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
+This script converts CCDA data in JSON format (originally generated from a Continuity of Care Document (CCD) in 
+standard XML/CCDA format) back to XML/CCDA format. The script determines the 
+section template to which the data belongs to by matching on its object properties (the determineSection function). 
+&nbsp;
+Two different functions allow for the upload of data that belongs only to a single section, or data for all sections
+in a CCD-A document (gen() vs. genWholeCCDA()). This aids in unit testing the individual sections for accuracy, even though
+in reality we do not need support for this.
+&nbsp;
+When the section has been determined, it is used to summon appropriate templating file from lib/generator/templates, which then
+generates the appropriate XML using the libxmljs Document API.
+&nbsp;
+In the case of compiling a whole CCD-A document, these individual sections are strung together and returned as one single
+document.
+*/
+&nbsp;
+var libxmljs = require("libxmljs");
+var libCCDAGen = require("./lib/templating_functions.js");
+var bbm = require('blue-button-meta');
+// maps code systems names to code system IDs
+var codeSystems = bbm.CCDA.codeSystems; 
+&nbsp;
+// Map section number to section name. 
+var sectionNames = {
+    0: "null",
+    1: "demographics",
+    2: "allergies",
+    3: "encounters",
+    4: "immunizations",
+    5: "medications",
+    6: "payers",
+    7: "plan_of_care",
+    8: "problems",
+    9: "procedures",
+    10: "results",
+    11: "social_history",
+    12: "vitals"
+}
+&nbsp;
+/*
+Generates CCD-A from JSON data. 
+@data is the data for a specific CCD section.
+@CCD boolean parameteres indicating if it is an entire CCD or only individual section
+@xmlDoc the previously generated CCDA/XML if generating an entire CCD
+@section_name specifies the section template to call to generate the XML for that section
+*/
+&nbsp;
+var gen = <span class="fstat-no" title="function not covered" >function (data, CCD, xmlDoc, section_name) {</span>
+<span class="cstat-no" title="statement not covered" >    if (data !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        if (section_name == "demographics") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/demographics.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "allergies") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/allergies.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "encounters") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/encounters.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "immunizations") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/immunizations.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "medications") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/medications.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "payers") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/payers.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "plan_of_care") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/plan_of_care.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "problems") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/problems.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "procedures") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/procedures.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "results") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/results.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "social_history") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/social_history.js')(data, codeSystems, CCD, xmlDoc);</span>
+        } else <span class="cstat-no" title="statement not covered" >if (section_name == "vitals") {</span>
+<span class="cstat-no" title="statement not covered" >            return require('./templates/vitals.js')(data, codeSystems, CCD, xmlDoc);</span>
+        }
+    } else {
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    }
+};
+&nbsp;
+/*
+Generates an entire CCD-A document. Uses gen() to string together the individual CCD-A sections. First, it generates
+the CCD-A header, then iterates through all the section templates, stringing them 
+together one after another.
+&nbsp;
+@data the entire CCD-A JSON data to be converted to XML/CCDA
+*/
+var genWholeCCDA = <span class="fstat-no" title="function not covered" >function (data) {</span>
+<span class="cstat-no" title="statement not covered" >    if (data.data != undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        data = data.data;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    var doc = new libxmljs.Document();</span>
+&nbsp;
+    // generate the header 
+<span class="cstat-no" title="statement not covered" >    var xmlDoc = doc.node('ClinicalDocument')</span>
+            .attr({"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"})
+            .attr({xmlns: "urn:hl7-org:v3"})
+            .attr({"xmlns:cda": "urn:hl7-org:v3"})
+            .attr({"xmlns:sdtc": "urn:hl7-org:sdtc"})
+        .node('realmCode').attr({code: "US"}).parent()
+        .node('typeId')
+            .attr({root: "2.16.840.1.113883.1.3"})
+            .attr({extension: "POCD_HD000040"}).parent()
+        .node('templateId').attr({root: "2.16.840.1.113883.10.20.22.1.1"}).parent()
+        .node('templateId').attr({root: "2.16.840.1.113883.10.20.22.1.2"}).parent()
+        .node('id').attr({extension: "TT988"}).attr({root: "2.16.840.1.113883.19.5.99999.1"}).parent()
+        .node('code').attr({codeSystem: "2.16.840.1.113883.6.1"}).attr({codeSystemName: "LOINC"})
+            .attr({code: "34133-9"}).attr({displayName: "Summarization of Episode Note"}).parent()
+        .node('title', "Community Health and Hospitals: Health Summary").parent()
+        .node('effectiveTime').attr({value: "TODO"}).parent()
+        .node('confidentialityCode').attr({code: "N"}).attr({codeSystem: "2.16.840.1.113883.5.25"}).parent()
+        .node('languageCode').attr({code: "en-US"}).parent()
+        .node('setId').attr({extension: "sTT988"}).attr({root: "2.16.840.1.113883.19.5.99999.19"}).parent()
+        .node('versionNumber').attr({value: "1"}).parent()
+        .node('recordTarget')
+            .node('patientRole')
+                .node('id').attr({extension: "998991"})
+                           .attr({root: "2.16.840.1.113883.19.5.99999.2"}).parent();
+&nbsp;
+                // generate demographics section
+<span class="cstat-no" title="statement not covered" >                xmlDoc = gen(data[sectionNames[1]], true, xmlDoc, sectionNames[1]);</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.parent() // end patientRole</span>
+        .parent() // end recordTarget
+    
+    // count the number of sections defined
+<span class="cstat-no" title="statement not covered" >    var count_sections = 0;</span>
+<span class="cstat-no" title="statement not covered" >    for (sections in data) {</span>
+<span class="cstat-no" title="statement not covered" >        if (sections != "demographics") {</span>
+<span class="cstat-no" title="statement not covered" >            count_sections++;</span>
+        }
+    }
+&nbsp;
+    // if there are more sections than just demographics, then generate them
+<span class="cstat-no" title="statement not covered" >    if (count_sections &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('component')</span>
+            .node('structuredBody')
+        // loop over all the sections and generate each one, adding them iteratively to each other
+<span class="cstat-no" title="statement not covered" >        for (var i = 2; i &lt;= Object.keys(sectionNames).length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = gen(data[sectionNames[i]], true, xmlDoc, sectionNames[i]);</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.parent() // end clinical document</span>
+<span class="cstat-no" title="statement not covered" >    return doc.toString();</span>
+}
+&nbsp;
+module.exports = gen;
+module.exports.genWholeCCDA = genWholeCCDA;
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 15 2014 11:50:51 GMT-0400 (EDT)</div>
+</div>
+
+<script src="../../../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

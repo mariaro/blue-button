@@ -1,0 +1,3013 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for blue-button/lib/generator/ccda/lib/templating_functions.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1>Code coverage report for <span class="entity">blue-button/lib/generator/ccda/lib/templating_functions.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">17.53% <small>(71 / 405)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 270)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 39)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">17.53% <small>(71 / 405)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">blue-button/lib/generator/ccda/lib/</a> &#187; templating_functions.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750
+751
+752
+753
+754
+755
+756
+757
+758
+759
+760
+761
+762
+763
+764
+765
+766
+767
+768
+769
+770
+771
+772
+773
+774
+775
+776
+777
+778
+779
+780
+781
+782
+783
+784
+785
+786
+787
+788
+789
+790
+791
+792
+793
+794
+795
+796
+797
+798
+799
+800
+801
+802
+803
+804
+805
+806
+807
+808
+809
+810
+811
+812
+813
+814
+815
+816
+817
+818
+819
+820
+821
+822
+823
+824
+825
+826
+827
+828
+829
+830
+831
+832
+833
+834
+835
+836
+837
+838
+839
+840
+841
+842
+843
+844
+845
+846
+847
+848
+849
+850
+851
+852
+853
+854
+855
+856
+857
+858
+859
+860
+861
+862
+863
+864
+865
+866
+867
+868
+869
+870
+871
+872
+873
+874
+875
+876
+877
+878
+879
+880
+881
+882
+883
+884
+885
+886
+887
+888
+889
+890
+891
+892
+893
+894
+895
+896
+897
+898</td><td class="line-coverage"><span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var XDate = require("xdate");
+var bbm = require("blue-button-meta");
+var codeSystems = bbm.CCDA.codeSystems;
+var OIDs = require("../../../parser/ccda/oids.js");
+&nbsp;
+var attempt = <span class="fstat-no" title="function not covered" >function(data, i, field) {</span>
+<span class="cstat-no" title="statement not covered" >    try {</span>
+<span class="cstat-no" title="statement not covered" >        return eval(field) ? eval(field) : undefined;     </span>
+    } catch(err) {
+<span class="cstat-no" title="statement not covered" >        return undefined;</span>
+    }
+};
+&nbsp;
+var reverseTable = <span class="fstat-no" title="function not covered" >function(OID, name) {</span>
+<span class="cstat-no" title="statement not covered" >    var obj = OIDs[OID];</span>
+<span class="cstat-no" title="statement not covered" >    for (var key in obj.table) {</span>
+<span class="cstat-no" title="statement not covered" >        obj.table[obj.table[key]] = key;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return {</span>
+        "name": name, 
+        "code": obj.table[name],
+        "code_system": OID, 
+        "code_system_name": obj.name
+    };
+}
+&nbsp;
+var value = <span class="fstat-no" title="function not covered" >function(xmlDoc, value, type, oText, text) {</span>
+<span class="cstat-no" title="statement not covered" >    if (value) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('value');</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.attr({"xsi:type": type})</span>
+            .attr({code: value["code"]})
+            .attr({displayName: value["name"]})
+            .attr({codeSystem: codeSystems[value["code_system_name"]] ? 
+                codeSystems[value["code_system_name"]][0] : codeSystems["SNOMED CT"][0]})
+            .attr({codeSystemName: value["code_system_name"] ? value["code_system_name"] : "SNOMED CT"});
+<span class="cstat-no" title="statement not covered" >        if (oText) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('originalText')</span>
+                .node('reference').attr({value: "#reaction" + oText}).parent()
+            .parent();
+        }
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.parent()</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        if (text) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('value', text);</span>
+<span class="cstat-no" title="statement not covered" >            if (type) {</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.attr({"xsi:type": type})</span>
+            }
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.parent();    </span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('value').attr({nullFlavor: "UNK"}).parent();</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+// insert an observation for the "social_history" section
+var insertObservation = <span class="fstat-no" title="function not covered" >function (xmlDoc, templateId, id, code, codeSystem, displayName, reference, timeArr, value, i) {</span>
+<span class="cstat-no" title="statement not covered" >    return xmlDoc.node('entry').attr({typeCode: "DRIV"})</span>
+        .node('observation').attr({classCode: "OBS"})
+            .attr({moodCode: "EVN"}) // social history observation
+            .node('templateId')
+                .attr({root: "2.16.840.1.113883.10.20.22.4.38"}).parent()
+            .node('id').attr({root: id}).parent()
+            .node('code')
+                .attr({code: "229819007"})
+                .attr({codeSystem: "2.16.840.1.113883.6.96"})
+                .attr({displayName: displayName})
+                .node('originalText')
+                    .node('reference').attr({value: "#soc" + (i + 1)}).parent()
+                .parent()
+            .parent()
+            .node('statusCode').attr({code: 'completed'}).parent()
+            .node('effectiveTime')
+                .node('low').attr({value: timeArr[0]}).parent()
+                .node('high').attr({value: timeArr[2]}).parent()
+            .parent()
+            .node('value', '1 pack per day').attr({"xsi:type": "ST"}).parent()
+        .parent()
+    .parent()
+}
+&nbsp;
+// Templates the header for a specific section
+var header = <span class="fstat-no" title="function not covered" >function (doc, templateIdOptional, templateIdRequired, code, codeSystem, codeSystemName, displayName, title, isCCD) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!isCCD) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = doc.node('ClinicalDocument')</span>
+            .attr({"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"})
+            .attr({xmlns: "urn:hl7-org:v3"})
+            .attr({"xmlns:cda": "urn:hl7-org:v3"})
+            .attr({"xmlns:sdtc": "urn:hl7-org:sdtc"});
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = doc.node('component');</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.node('section')</span>
+        .node('templateId')
+            .attr({root: templateIdOptional}).parent()
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (templateIdRequired != undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('templateId')</span>
+            .attr({root: templateIdRequired}).parent();
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (codeSystemName != undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('code')</span>
+            .attr({code: code})
+            .attr({codeSystem: codeSystem})
+            .attr({codeSystemName: codeSystemName})
+            .attr({displayName: displayName}).parent();
+    } else <span class="cstat-no" title="statement not covered" >if (codeSystemName == undefined &amp;&amp; displayName == undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('code').attr({code: code})</span>
+            .attr({codeSystem: codeSystem}).parent();
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('code').attr({code: code})</span>
+            .attr({codeSystem: codeSystem})
+            .attr({codeSystemName: codeSystemName})
+            .attr({displayName: displayName}).parent();
+    }
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.node('title', title).parent()</span>
+        .node('text').parent()
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+// Templates the header for a specific section
+var header_v2 = <span class="fstat-no" title="function not covered" >function (doc, templateIdOptional, templateIdRequired, code_obj, title, isCCD) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!isCCD) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = doc.node('ClinicalDocument')</span>
+            .attr({"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"})
+            .attr({xmlns: "urn:hl7-org:v3"})
+            .attr({"xmlns:cda": "urn:hl7-org:v3"})
+            .attr({"xmlns:sdtc": "urn:hl7-org:sdtc"});
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = doc.node('component');</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.node('section')</span>
+        .node('templateId').attr({root: templateIdOptional}).parent()
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (templateIdRequired) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('templateId').attr({root: templateIdRequired}).parent();</span>
+    }
+<span class="cstat-no" title="statement not covered" >    xmlDoc = code(xmlDoc, code_obj).parent();</span>
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.node('title', title).parent()</span>
+        .node('text').parent()
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+&nbsp;
+var tel = <span class="fstat-no" title="function not covered" >function (xmlDoc, tel) {</span>
+<span class="cstat-no" title="statement not covered" >    if (tel) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('telecom')</span>
+            .attr({value: "tel:" + checkObj(tel, tel[0]["number"])})
+            .attr(tel[0]["type"] ? {use: acronymize(tel[0]["type"])} : 
+                {use: "HP"}).parent()
+    } else {
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('telecom')</span>
+            .attr({nullFlavor: "UNK"}).parent();
+    }
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function acronymize(string) {</span>
+<span class="cstat-no" title="statement not covered" >    var ret = string.split(" ");</span>
+<span class="cstat-no" title="statement not covered" >    var fL = ret[0].slice(0, 1);</span>
+<span class="cstat-no" title="statement not covered" >    var lL = ret[1].slice(0, 1);</span>
+<span class="cstat-no" title="statement not covered" >    fL = fL.toUpperCase();</span>
+<span class="cstat-no" title="statement not covered" >    lL = lL.toUpperCase();</span>
+<span class="cstat-no" title="statement not covered" >    ret = fL + lL;</span>
+<span class="cstat-no" title="statement not covered" >    if (ret == "PH")</span>
+<span class="cstat-no" title="statement not covered" >        ret = "HP"</span>
+<span class="cstat-no" title="statement not covered" >    return ret;</span>
+}
+&nbsp;
+var name = <span class="fstat-no" title="function not covered" >function (xmlDoc, name, use) {</span>
+<span class="cstat-no" title="statement not covered" >    if (name == undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('name').attr({ nullFlavor: "UNK"}).parent();</span>
+    } else <span class="cstat-no" title="statement not covered" >if (Array.isArray(name)) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('name');</span>
+<span class="cstat-no" title="statement not covered" >        if (use) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.attr({use: use});</span>
+        }
+<span class="cstat-no" title="statement not covered" >            if (name[0]["prefix"])</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('prefix', name[0]["prefix"]).parent();</span>
+<span class="cstat-no" title="statement not covered" >            if (name[0]["first"])</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('given', name[0]["first"]).parent();</span>
+<span class="cstat-no" title="statement not covered" >            if (name[0]["middle"])</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('given', name[0]["middle"][0]).parent();</span>
+<span class="cstat-no" title="statement not covered" >            if (name[0]["last"])</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('family', name[0]["last"]).parent();</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.parent();</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('name');</span>
+<span class="cstat-no" title="statement not covered" >        if (use) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.attr({use: use});</span>
+        }
+<span class="cstat-no" title="statement not covered" >            if (name["prefix"])</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('prefix', name["prefix"]).parent();</span>
+<span class="cstat-no" title="statement not covered" >            if (name["first"])</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('given', name["first"]).parent();</span>
+<span class="cstat-no" title="statement not covered" >            if (name["middle"])</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('given', name["middle"][0]).parent();</span>
+<span class="cstat-no" title="statement not covered" >            if (name["last"])</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('family', name["last"]).parent();</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.parent();</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    }
+}
+&nbsp;
+var addr = <span class="fstat-no" title="function not covered" >function (xmlDoc, addr, birthplace) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!addr) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('addr')</span>
+            .attr({nullFlavor: "UNK"}).parent()
+    } else <span class="cstat-no" title="statement not covered" >if (addr === "generic") {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('addr')</span>
+            .node('streetAddressLine', '1001 Village Avenue').parent()
+            .node('city', 'Portland').parent()
+            .node('state', 'OR').parent()
+            .node('postalCode', '99123').parent()
+            .node('country', 'US').parent()
+            .parent()
+    } else <span class="cstat-no" title="statement not covered" >if (addr[0]) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('addr');</span>
+<span class="cstat-no" title="statement not covered" >        if (addr[0]["use"]) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc.attr({use: acronymize(addr[0]["use"])});</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        if (!birthplace &amp;&amp; addr[0]["street_lines"] !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('streetAddressLine', addr[0]["street_lines"][0]).parent()</span>
+        }
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('city', addr[0]["city"]).parent()</span>
+            .node('state', addr[0]["state"]).parent()
+            .node('postalCode', addr[0]["zip"]).parent()
+            .node('country', addr[0]["country"]).parent()
+            .parent()
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('addr');</span>
+<span class="cstat-no" title="statement not covered" >        if (addr["use"]) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc.attr({use: acronymize(addr[0]["use"])});</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (!birthplace) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('streetAddressLine', addr["street_lines"][0]).parent()</span>
+        }
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('city', addr["city"]).parent()</span>
+            .node('state', addr["state"]).parent()
+            .node('postalCode', addr["zip"]).parent()
+            .node('country', addr["country"]).parent()
+            .parent()
+    }
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+var performerRevised = <span class="fstat-no" title="function not covered" >function (xmlDoc, performer, spec) {</span>
+<span class="cstat-no" title="statement not covered" >    spec = spec ? spec : {};</span>
+<span class="cstat-no" title="statement not covered" >    if (performer) {</span>
+<span class="cstat-no" title="statement not covered" >        var telecom = performer["telecom"] ? </span>
+        performer["telecom"] : performer["phone"];
+    }
+<span class="cstat-no" title="statement not covered" >    if (spec &amp;&amp; spec["typeCode"]) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('performer')</span>
+            .attr({typeCode: spec["typeCode"]});
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('performer');</span>
+    }
+<span class="cstat-no" title="statement not covered" >    if (spec &amp;&amp; spec["tID"])</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('templateId')</span>
+            .attr({root: "2.16.840.1.113883.10.20.22.4.87"}).parent();
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.node('assignedEntity');</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = performer ? id(xmlDoc, performer["identifiers"]) : id(xmlDoc, spec["id"], spec["extension"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = performer ? addr(xmlDoc, performer["address"]) : addr(xmlDoc, spec["addr"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = performer ? tel(xmlDoc, telecom) : tel(xmlDoc, spec["tel"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = performer ? assignedPerson(xmlDoc, performer["name"]) : </span>
+        assignedPerson(xmlDoc, spec["assignedP"]);
+<span class="cstat-no" title="statement not covered" >        xmlDoc = performer ? representedOrganization(xmlDoc, performer["organization"]) : </span>
+        representedOrganization(xmlDoc, spec["repOrg"]);
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.parent()</span>
+        .parent();
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+var assignedPerson = <span class="fstat-no" title="function not covered" >function (xmlDoc, assignedPerson) {</span>
+<span class="cstat-no" title="statement not covered" >    if (assignedPerson == "generic") {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('assignedPerson')</span>
+            .node('name')
+                .node('prefix', "Dr.").parent()
+                .node('given', "Henry").parent()
+                .node('family', 'Seven').parent()
+            .parent()
+        .parent()
+    } else <span class="cstat-no" title="statement not covered" >if (assignedPerson == undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('assignedPerson')</span>
+            .node('name')
+                .node('given', assignedPerson[0]["first"]).parent()
+                .node('family', assignedPerson[0]["last"]).parent()
+            .parent()
+        .parent();
+    }
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+var representedOrganization = <span class="fstat-no" title="function not covered" >function (xmlDoc, performer, tag) {</span>
+<span class="cstat-no" title="statement not covered" >    tag ? tag : 'representedOrganization';</span>
+<span class="cstat-no" title="statement not covered" >    performer = Array.isArray(performer) ? performer[0] : performer;</span>
+<span class="cstat-no" title="statement not covered" >    if (performer &amp;&amp; performer != "generic") {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('representedOrganization');</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = id(xmlDoc, performer["identifiers"]);</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('name', performer["name"] ? performer["name"][0] : undefined).parent();</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = tel(xmlDoc, performer["phone"]);</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = addr(xmlDoc, performer["address"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.parent();</span>
+    } else <span class="cstat-no" title="statement not covered" >if (performer == "generic") {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('representedOrganization')</span>
+            .node('id')
+                .attr({root: "2.16.840.1.113883.19.5.9999.1393"}).parent()
+            .node('name', "Community Health and Hospitals").parent();
+<span class="cstat-no" title="statement not covered" >            xmlDoc = tel(xmlDoc, undefined);</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = addr(xmlDoc, undefined);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.parent();</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+// get the times/dates for the value attribute of effectiveTime
+// @return an array of dates, each date having two entries corresponding
+// to two different date formats: yyyymmdd or yyyymm
+// for example: [19991101, 199911]
+var getTimes = <span class="fstat-no" title="function not covered" >function (date) {</span>
+<span class="cstat-no" title="statement not covered" >    if (Array.isArray(date)) {</span>
+<span class="cstat-no" title="statement not covered" >        if (date != undefined) {</span>
+<span class="cstat-no" title="statement not covered" >            var timeArr = [];</span>
+<span class="cstat-no" title="statement not covered" >            for (var i = 0; i &lt; date.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >                var effectiveTime = (new XDate(date[i]["date"])).toString("u").split("-");</span>
+<span class="cstat-no" title="statement not covered" >                effectiveTime[2] = effectiveTime[2].slice(0, 2);</span>
+<span class="cstat-no" title="statement not covered" >                var time = effectiveTime[0] + effectiveTime[1] + (zeroFill(parseInt(effectiveTime[2]) + 1, 2));</span>
+<span class="cstat-no" title="statement not covered" >                timeArr.push(time);</span>
+<span class="cstat-no" title="statement not covered" >                timeArr.push(effectiveTime[0] + effectiveTime[1]);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            return timeArr;</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            return ["UNK", "UNK"];</span>
+        }
+    } else {
+<span class="cstat-no" title="statement not covered" >        var date_times = {};</span>
+<span class="cstat-no" title="statement not covered" >        var timeArr = [];</span>
+<span class="cstat-no" title="statement not covered" >        if (typeof date === "object") {</span>
+<span class="cstat-no" title="statement not covered" >            Object.keys(date).forEach(<span class="fstat-no" title="function not covered" >function (key) {</span></span>
+<span class="cstat-no" title="statement not covered" >                if (date[key]["date"] &amp;&amp; date[key]["date"] !== "Invalid Date") {</span>
+<span class="cstat-no" title="statement not covered" >                    var timeArr = [];</span>
+<span class="cstat-no" title="statement not covered" >                    var effectiveTime = date[key]["date"].split("-");</span>
+<span class="cstat-no" title="statement not covered" >                    effectiveTime[2] = effectiveTime[2].slice(0, 2);</span>
+<span class="cstat-no" title="statement not covered" >                    var time = effectiveTime[0] + effectiveTime[1] + effectiveTime[2];</span>
+<span class="cstat-no" title="statement not covered" >                    timeArr.push(time);</span>
+<span class="cstat-no" title="statement not covered" >                    timeArr.push(effectiveTime[0] + effectiveTime[1]);</span>
+<span class="cstat-no" title="statement not covered" >                    date_times[key] = timeArr;</span>
+                }
+            });
+        }
+<span class="cstat-no" title="statement not covered" >        return date_times;</span>
+    } 
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function zeroFill(number, width) {</span>
+<span class="cstat-no" title="statement not covered" >    width -= number.toString().length;</span>
+<span class="cstat-no" title="statement not covered" >    if (width &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >        return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    return number + ""; </span>// always return a string
+}
+&nbsp;
+// template for the consumable/manufacturedProduct section
+// used in: medication information and immunization medication information
+var consumable = <span class="fstat-no" title="function not covered" >function (xmlDoc, product, ref) {</span>
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.node('consumable');</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = manufacturedProduct(xmlDoc, product, ref);</span>
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.parent();</span>
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+// part of the consumable template function.
+var manufacturedProduct = <span class="fstat-no" title="function not covered" >function (xmlDoc, product, ref, sec) {</span>
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.node('manufacturedProduct').attr({classCode: "MANU"}) // medication information / immunization medication information</span>
+        .node('templateId').attr({root: ref.indexOf("immi") &gt; -1 ?  "2.16.840.1.113883.10.20.22.4.54" : '2.16.840.1.113883.10.20.22.4.23'}).parent();
+<span class="cstat-no" title="statement not covered" >        if (product &amp;&amp; product["product"]) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = id(xmlDoc, product["identifiers"]);</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('manufacturedMaterial');</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = code(xmlDoc, sec ? product["product"] ? product["product"]["translations"] ? product["product"]["translations"][0] : undefined : undefined : product["product"], {});</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('originalText')</span>
+                    .node('reference').attr({value: ref}).parent()
+                .parent();
+<span class="cstat-no" title="statement not covered" >                xmlDoc = code(xmlDoc, product["product"] ? </span>
+                    product["product"]["translations"] ? product["product"]["translations"][0] : undefined : undefined, {}, 'translation').parent();
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.parent() // end code</span>
+<span class="cstat-no" title="statement not covered" >                if (product["lot_number"]) {</span>
+<span class="cstat-no" title="statement not covered" >                    xmlDoc = xmlDoc.node('lotNumberText', product["product"]["lot_number"]).parent();</span>
+                }
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.parent() // end manufacturedMaterial</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('manufacturerOrganization')</span>
+                .node('name', product["manufacturer"]).parent()
+            .parent();
+        } else {
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('id')</span>
+                .attr({nullFlavor: "UNK"}).parent()
+            .node('manufacturedMaterial');
+<span class="cstat-no" title="statement not covered" >                xmlDoc = code(xmlDoc, undefined);</span>
+<span class="cstat-no" title="statement not covered" >                    xmlDoc = xmlDoc.node('originalText')</span>
+                        .node('reference')
+                            .attr({ value: ref}).parent()
+                    .parent();
+<span class="cstat-no" title="statement not covered" >                    xmlDoc = code(xmlDoc, undefined, {}, 'translation').parent();</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.parent()</span>
+            .parent()
+            .node('manufacturerOrganization')
+                .node('name', "UNK").parent()
+            .parent()
+        }
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.parent(); </span>// end manufacturedProduct
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+var entryRelationship = <span class="fstat-no" title="function not covered" >function (xmlDoc, data, type, typeCode, ref) {</span>
+<span class="cstat-no" title="statement not covered" >    if (data) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('entryRelationship').attr({typeCode: typeCode})</span>
+            .attr({inversionInd: "true"})
+            .node(type).attr({classCode: "ACT"}).attr({moodCode: "INT"})
+                .node('templateId').attr({root: "2.16.840.1.113883.10.20.22.4.20"}).parent();
+<span class="cstat-no" title="statement not covered" >                xmlDoc = code(xmlDoc, data["code"]).parent();</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('text', data["freeText"])</span>
+                    .node('reference')
+                        .attr({value: ref}).parent()
+                .parent()
+                .node('statusCode').attr({code: "completed"}).parent()
+                // if (data[i]["reaction"]) {
+                //     xmlDoc = xmlDoc.node('value')
+                //         .attr({"xsi:type": "CD"})
+                //         .attr({code: code})
+                //         .attr({displayName: (subsection == 1.1 ? data[i]["reaction"] ? 
+                //             data[i]["reaction"][0]["severity"] : "UNK" : data[i]["reaction"] ? 
+                //             data[i]["reaction"][0]["reaction"]["name"] : "UNK")})
+                //         .attr({codeSystem: "2.16.840.1.113883.6.96"})
+                //         .attr({codeSystemName: "SNOMED CT"}).parent();
+                // }
+                // if (type === "observation") {
+                //     xmlDoc = xmlDoc.node('interpretationCode')
+                //         .attr({code: (subsection == 1.1 ? "S" : "N")})
+                //         .attr({displayName: (subsection == 1.1 ? 'Susceptible' : "Normal")})
+                //         .attr({codeSystem: "2.16.840.1.113883.1.11.78"})
+                //         .attr({codeSystemName: "Observation Interpretation"}).parent();
+                // }
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.parent()</span>
+        .parent()
+    }
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+var substanceAdministration = <span class="fstat-no" title="function not covered" >function (xmlDoc, data, i, refSBADM, refCONS, templIdSBADM, templIdCONS) {</span>
+<span class="cstat-no" title="statement not covered" >    var timeArr = getTimes(data[i]["date"]);</span>
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.node('substanceAdministration')</span>
+            .attr({classCode: "SBADM"})
+            .attr({moodCode: "EVN"}).attr({negationInd: "false"})
+        .node('templateId')
+            .attr({root: "2.16.840.1.113883.10.20.22.4.52"}).parent();
+<span class="cstat-no" title="statement not covered" >        xmlDoc = id(xmlDoc, data[i]["identifiers"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('text')</span>
+            .node('reference')
+                .attr({value: refSBADM}).parent()
+        .parent()
+        .node('statusCode')
+            .attr({code: 'completed'}).parent()
+        .node('effectiveTime')
+            .attr({"xsi:type": "IVL_TS"})
+            .attr({value: timeArr[0]}).parent();
+<span class="cstat-no" title="statement not covered" >        xmlDoc = routeCode(xmlDoc, data[i]["administration"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = doseQuantity(xmlDoc, data[i]["administration"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = consumable(xmlDoc, data, i, refCONS, templIdCONS);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = performerRevised(xmlDoc, data[i]["performer"], {});</span>
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+var id = <span class="fstat-no" title="function not covered" >function (xmlDoc, id, ext) {</span>
+<span class="cstat-no" title="statement not covered" >    if (id) {</span>
+<span class="cstat-no" title="statement not covered" >        if (ext) {</span>
+<span class="cstat-no" title="statement not covered" >            return xmlDoc.node('id').attr({root: checkObj(id, id[0]["identifier"])})</span>
+                .attr({extension: checkObj(ext, ext[0]["extension"])}).parent()
+        } else {
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('id').attr({root: checkObj(id, id[0]["identifier"])});</span>
+<span class="cstat-no" title="statement not covered" >            if (id[0]["extension"]) {</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.attr({extension: id[0]["extension"]})</span>
+            }
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.parent();</span>
+<span class="cstat-no" title="statement not covered" >            return xmlDoc;</span>
+        }
+    } else {
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('id').attr({nullFlavor: "UNK"}).parent();</span>
+    }
+}
+&nbsp;
+var checkObj = <span class="fstat-no" title="function not covered" >function (tag, objTag) {</span>
+<span class="cstat-no" title="statement not covered" >    return typeof tag === 'object' ? objTag : tag;</span>
+}
+&nbsp;
+var routeCode = <span class="fstat-no" title="function not covered" >function (xmlDoc, administration) {</span>
+<span class="cstat-no" title="statement not covered" >    if (administration == undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('routeCode')</span>
+            .attr({nullFlavor: "UNK"}).parent()
+    } else <span class="cstat-no" title="statement not covered" >if (administration["body_site"] != undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('routeCode')</span>
+            .attr({code: administration["body_site"]['code']})
+            .attr({codeSystem: "2.16.840.1.113883.3.26.1.1"})
+            .attr({codeSystemName: administration["body_site"]["code_system_name"]})
+            .attr({displayName: administration["body_site"]["name"]}).parent();
+    } else <span class="cstat-no" title="statement not covered" >if (administration["route"] != undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('routeCode')</span>
+            .attr({code: administration['route']['code']})
+            .attr({codeSystem: "2.16.840.1.113883.3.26.1.1"})
+            .attr({codeSystemName: administration["route"]["code_system_name"]})
+            .attr({displayName: administration["route"]["name"]}).parent()
+    } else {
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    }
+}
+&nbsp;
+var doseQuantity = <span class="fstat-no" title="function not covered" >function (xmlDoc, administration) {</span>
+<span class="cstat-no" title="statement not covered" >    if (administration !== undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        if (administration["body_site"] !== undefined &amp;&amp; </span>
+            administration["body_site"]["dose"] != undefined) {
+<span class="cstat-no" title="statement not covered" >            return xmlDoc.node('doseQuantity')</span>
+                .attr({value: administration["body_site"]["dose"]["value"]})
+                .attr({unit: administration["body_site"]["dose"]["unit"]}).parent();
+        } else <span class="cstat-no" title="statement not covered" >if (administration["dose"] != undefined) {</span>
+<span class="cstat-no" title="statement not covered" >            return xmlDoc.node('doseQuantity')</span>
+                .attr({value: administration["dose"]["value"]})
+                .attr({unit: administration["dose"]["unit"]}).parent();
+        }
+    } else {
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('doseQuantity')</span>
+            .attr({nullFlavor: "UNK"}).parent();
+    }
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+var medication_administration = <span class="fstat-no" title="function not covered" >function (xmlDoc, administration) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!administration) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('routeCode')</span>
+            .attr({nullFlavor: "UNK"}).parent()
+            .node('doseQuantity').attr({nullFlavor: "UNK"}).parent()
+            .node('rateQuantity').attr({nullFlavor: "UNK"}).parent()
+            .node('maxDoseQuantity').attr({nullFlavor: "UNK"})
+            .node('numerator').attr({nullFlavor: "UNK"}).parent()
+            .node('denominator').attr({nullFlavor: "UNK"}).parent()
+        .parent()
+            .node('administrationUnitCode')
+                .attr({nullFlavor: "UNK"}).parent()
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = routeCode(xmlDoc, administration);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = doseQuantity(xmlDoc, administration);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = rateQuantity(xmlDoc, administration["rate"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('maxDoseQuantity')</span>
+            .attr({nullFlavor: "UNK"})
+            .node('numerator')
+                .attr({nullFlavor: "UNK"}).parent()
+            .node('denominator')
+                .attr({nullFlavor: "UNK"}).parent()
+            .parent();
+<span class="cstat-no" title="statement not covered" >        if (administration["form"] != undefined) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = code(xmlDoc, administration["form"], </span>
+                {'code_system': "2.16.840.1.113883.3.26.1.1"}, 'administrationUnitCode').parent();
+        }
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    }
+}
+&nbsp;
+var code = <span class="fstat-no" title="function not covered" >function (xmlDoc, entity, spec, tag) {</span>
+<span class="cstat-no" title="statement not covered" >    tag = tag ? tag : 'code';</span>
+<span class="cstat-no" title="statement not covered" >    spec = spec ? spec : {};</span>
+<span class="cstat-no" title="statement not covered" >    entity = entity ? entity : {};</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >    if (Object.keys(entity).length === 0 &amp;&amp; Object.keys(spec).length === 0) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node(tag)</span>
+            .attr({nullFlavor: "UNK"});
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node(tag);</span>
+<span class="cstat-no" title="statement not covered" >        var code_attr = spec["code"] ? spec["code"] : entity["code"] ? entity["code"] : undefined;</span>
+        
+<span class="cstat-no" title="statement not covered" >        if (code_attr) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.attr({code: code_attr});</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var name_attr = spec["name"] ? spec["name"] : entity["name"] ? entity["name"] : undefined;</span>
+<span class="cstat-no" title="statement not covered" >        if (name_attr) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.attr({displayName: spec["name"] ? spec["name"] : entity["name"]});</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var code_system_attr = spec["code_system"] ? spec["code_system"] : entity["code_system_name"] ? </span>
+        codeSystems[entity["code_system_name"]] ? codeSystems[entity["code_system_name"]][0] : entity["code_system_name"]: codeSystems["SNOMED CT"][0];
+<span class="cstat-no" title="statement not covered" >        if (code_system_attr) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.attr({codeSystem: code_system_attr});</span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        var code_system_name_attr = spec["code_system_name"] ? </span>
+        spec["code_system_name"] : entity["code_system_name"] ? entity["code_system_name"] : undefined;
+<span class="cstat-no" title="statement not covered" >        if (code_system_name_attr) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.attr({codeSystemName: code_system_name_attr});</span>
+        }
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    }
+}
+&nbsp;
+var rateQuantity = <span class="fstat-no" title="function not covered" >function (xmlDoc, rate) {</span>
+<span class="cstat-no" title="statement not covered" >    return rate ? xmlDoc.node('rateQuantity')</span>
+        .attr({value: rate["value"]})
+        .attr({unit: rate["unit"]}).parent() : unk(xmlDoc, 'rateQuantity', 'UNK');
+}
+&nbsp;
+var unk = <span class="fstat-no" title="function not covered" >function (xmlDoc, tag, nullFlavor) {</span>
+<span class="cstat-no" title="statement not covered" >    return xmlDoc.node(tag).attr({nullFlavor: nullFlavor}).parent();</span>
+}
+&nbsp;
+// TODO: this is not used ...
+var immunization_medication_information = <span class="fstat-no" title="function not covered" >function (xmlDoc, product) {</span>
+<span class="cstat-no" title="statement not covered" >    return xmlDoc.node('manufacturedProduct')</span>
+        .attr({classCode: "MANU"}) // medication information
+        .node('templateId')
+            .attr({root: templateId}).parent()
+        .node('manufacturedMaterial')
+            .node('code')
+                .attr({code: data[i]["product"]["product"]["code"]})
+                .attr({codeSystem: codeSystems[data[i]["product"]["product"]["code_system_name"]]})
+                .attr({displayName: data[i]["product"]["product"]["name"]})
+                .attr({codeSystemName: data[i]["product"]["product"]["code_system_name"]})
+                .node('originalText')
+                    .node('reference').attr({value: ref}).parent()
+                .parent();
+<span class="cstat-no" title="statement not covered" >                xmlDoc = code(xmlDoc, data[i]["product"]["product"] ? </span>
+                data[i]["product"]["product"]["translations"][0] : undefined, {}, 'translation').parent();
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.parent()</span>
+            .node('lotNumberText', data[i]["product"]["lot_number"]).parent()
+        .parent()
+        .node('manufacturerOrganization')
+            .node('name', data[i]["product"]["manufacturer"]).parent()
+        .parent()
+    .parent()
+}
+&nbsp;
+/* 
+TODO: look at refactoring this
+Returns the number of entries in a data set for a specific section, in order to know how many times to 
+loop over the data.
+&nbsp;
+@returns -
+entries[0] -- array of unique entries
+entries[1] -- object which maps entries to number of entries
+*/
+var getNumEntries = <span class="fstat-no" title="function not covered" >function (data) {</span>
+<span class="cstat-no" title="statement not covered" >    var entriesArr = [];</span>
+<span class="cstat-no" title="statement not covered" >    var entries = {};</span>
+<span class="cstat-no" title="statement not covered" >    for (var i = 0; i &lt; data.length; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        entriesArr[i] = data[i]["date_time"]["point"]["date"] ? (new XDate(data[i]["date_time"]["point"]["date"])).toString("u").slice(0, 4) : "UNK";</span>
+<span class="cstat-no" title="statement not covered" >        entries[entriesArr[i]] = entries[entriesArr[i]] ? entries[entriesArr[i]] + 1 : 1;</span>
+    }
+<span class="cstat-no" title="statement not covered" >    var uniqueEntries = entriesArr.filter(<span class="fstat-no" title="function not covered" >function (v, i) {</span></span>
+<span class="cstat-no" title="statement not covered" >        return i == entriesArr.lastIndexOf(v);</span>
+    });
+<span class="cstat-no" title="statement not covered" >    return [uniqueEntries, entries];</span>
+}
+&nbsp;
+var maritalStatusCode = <span class="fstat-no" title="function not covered" >function (xmlDoc, marriage_status) {</span>
+<span class="cstat-no" title="statement not covered" >    if (marriage_status == undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('maritalStatusCode')</span>
+            .attr({nullFlavor: "UNK"}).parent();
+    } else {
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('maritalStatusCode')</span>
+            .attr({code: marriage_status.substring(0, 1)})
+            .attr({displayName: marriage_status})
+            .attr({codeSystem: "2.16.840.1.113883.5.2"})
+            .attr({codeSystemName: "MaritalStatusCode"}).parent()
+    }
+&nbsp;
+}
+&nbsp;
+var guardianPerson = <span class="fstat-no" title="function not covered" >function (xmlDoc, guardians) {</span>
+<span class="cstat-no" title="statement not covered" >    if (guardians == undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('guardianPerson')</span>
+            .node('name')
+                .node('given', guardians[0]["names"][0]["first"]).parent()
+                .node('family', guardians[0]["names"][0]["last"]).parent()
+            .parent()
+        .parent()
+    }
+&nbsp;
+}
+&nbsp;
+var languageCommunication = <span class="fstat-no" title="function not covered" >function (xmlDoc, languages) {</span>
+<span class="cstat-no" title="statement not covered" >    if (languages == undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('languageCommunication')</span>
+            .node('languageCode')
+                .attr({nullFlavor: "UNK"}).parent()
+            .node('modeCode')
+                .attr({code: "ESP"})
+                .attr({nullFlavor: "UNK"}).parent()
+            .node('proficiencyLevelCode')
+                .attr({nullFlavor: "UNK"}).parent()
+            .node('preferenceInd')
+                .attr({nullFlavor: "UNK"}).parent()
+        .parent()
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('languageCommunication')</span>
+            .node('languageCode')
+                .attr({code: languages[0]["language"]}).parent()
+            .node('modeCode')
+                .attr({code: "ESP"})
+                .attr({displayName: languages[0]["mode"]})
+                .attr({codeSystem: "2.16.840.1.113883.5.60"})
+                .attr({codeSystemName: "LanguageAbilityMode"}).parent();
+<span class="cstat-no" title="statement not covered" >            if (languages[0]["proficiency"] != undefined) {</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('proficiencyLevelCode')</span>
+                    .attr({code: languages[0]["proficiency"].substring(0, 1)})
+                    .attr({displayName: languages[0]["proficiency"]})
+                    .attr({codeSystem: "2.16.840.1.113883.5.61"})
+                    .attr({codeSystemName: "LanguageAbilityProficiency"}).parent();
+            } else {
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('proficiencyLevelCode')</span>
+                    .attr({nullFlavor: "UNK"}).parent();
+            }
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('preferenceInd')</span>
+                .attr({value: "true"}).parent()
+        .parent()
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    }
+}
+&nbsp;
+// generate participant information
+var participant = <span class="fstat-no" title="function not covered" >function (xmlDoc, locations, spec) {</span>
+<span class="cstat-no" title="statement not covered" >    spec = spec ? spec : {};</span>
+<span class="cstat-no" title="statement not covered" >    if (!locations) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('participant')</span>
+            .attr({nullFlavor: "UNK"}).parent();
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('participant')</span>
+            .attr({typeCode: spec["typeCode"] ? spec["typeCode"] : "LOC"})
+            .node('participantRole')
+                .attr({classCode: spec["classCode"] ? spec["classCode"] : "SDLOC"}) // service delivery location template
+        .node('templateId')
+            .attr({root: spec["tId"] ? spec["tId"] : "2.16.840.1.113883.10.20.22.4.32"}).parent();
+<span class="cstat-no" title="statement not covered" >        if (locations[0]["location_type"]) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = code(xmlDoc, locations[0]["location_type"], {"code_system": "2.16.840.1.113883.6.259"}).parent();</span>
+        }
+<span class="cstat-no" title="statement not covered" >        xmlDoc = addr(xmlDoc, locations[0]["address"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = tel(xmlDoc, locations[0]["phone"]);</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = playingEntity(xmlDoc, locations, {"classCode": "PLC"});</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.parent()</span>
+        .parent()
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    }
+}
+&nbsp;
+var playingEntity = <span class="fstat-no" title="function not covered" >function (xmlDoc, entity, spec) {</span>
+<span class="cstat-no" title="statement not covered" >    spec = spec ? spec : {};</span>
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.node('playingEntity');</span>
+<span class="cstat-no" title="statement not covered" >    if (spec &amp;&amp; spec["classCode"]) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.attr({classCode: spec["classCode"]});</span>
+    }
+    // xmlDoc = code(xmlDoc, locations[0]["location_type"] ? locations[0]["location_type"] : undefined);
+    // if (nodes["originalText"]) {
+    //     xmlDoc = xmlDoc.node('originalText')
+    //         .node('reference').attr({value: value}).parent()
+    //         .parent();
+    // }
+<span class="cstat-no" title="statement not covered" >    xmlDoc = entity[0]["name"] ? xmlDoc.node('name', entity[0]["name"]).parent() : xmlDoc;</span>
+<span class="cstat-no" title="statement not covered" >    xmlDoc = xmlDoc.parent();</span>
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+// used by encounters and medications
+var indicationConstraint = <span class="fstat-no" title="function not covered" >function (xmlDoc, findings, time) {</span>
+<span class="cstat-no" title="statement not covered" >    if (!findings) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node('entryRelationship')</span>
+            .attr({typeCode: "RSON"})
+            .node('observation')
+                .attr({classCode: "OBS"}).attr({moodCode: "EVN"})
+                .node('templateId')
+                    .attr({root: "2.16.840.1.113883.10.20.22.4.19"}).parent()
+                .node('id')
+                    .attr({root: "db734647-fc99-424c-a864-7e3cda82e703"})
+                    .attr({extension: "45665"}).parent()
+                .node('code')
+                    .attr({code: "404684003"})
+                    .attr({displayName: "Finding"})
+                    .attr({codeSystem: "2.16.840.1.113883.6.96"})
+                    .attr({codeSystemName: "SNOMED CT"}).parent()
+                .node('statusCode')
+                    .attr({code: 'completed'}).parent();
+<span class="cstat-no" title="statement not covered" >                xmlDoc = effectiveTime(xmlDoc, time);</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = value(xmlDoc, findings[0], "CD");</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.parent()</span>
+        .parent()
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    }
+}
+&nbsp;
+// generate effectiveTime node
+var effectiveTime = <span class="fstat-no" title="function not covered" >function (xmlDoc, time, tag, xsi_type) {</span>
+<span class="cstat-no" title="statement not covered" >    var node = tag ? tag : 'effectiveTime';</span>
+<span class="cstat-no" title="statement not covered" >    if (Array.isArray(time)) {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node(node)</span>
+        .node('low').attr({value: time[0]}).parent();
+<span class="cstat-no" title="statement not covered" >        if (time[2]) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.node('high')</span>
+                .attr({value: time[2]}).parent()
+        }
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.parent();</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof time === "object") {</span>
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node(node);</span>
+<span class="cstat-no" title="statement not covered" >        if (xsi_type) {</span>
+<span class="cstat-no" title="statement not covered" >            xmlDoc.attr({"xsi:type": xsi_type});</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (time['point']) {</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.attr({value: time['point'][0]});</span>
+        } else {
+<span class="cstat-no" title="statement not covered" >            if (time['low']) {</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('low').attr({value: time['low'][0]}).parent();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (time['high']) {</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('high').attr({value: time['high'][0]}).parent();</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (time['center']) {</span>
+<span class="cstat-no" title="statement not covered" >                xmlDoc = xmlDoc.node('center').attr({value: time['center'][0]}).parent();</span>
+            }
+        }
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.parent();</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        xmlDoc = xmlDoc.node(node).node('low')</span>
+            .attr({nullFlavor: "UNK"}).parent();
+    }
+<span class="cstat-no" title="statement not covered" >    return xmlDoc;</span>
+}
+&nbsp;
+// generate precondition node
+// used in: medications
+var precondition = <span class="fstat-no" title="function not covered" >function (xmlDoc, precondition) {</span>
+<span class="cstat-no" title="statement not covered" >    if (precondition == undefined) {</span>
+<span class="cstat-no" title="statement not covered" >        return xmlDoc;</span>
+    } else {
+<span class="cstat-no" title="statement not covered" >        return xmlDoc.node('precondition')</span>
+            .attr({typeCode: "PRCN"}) // precondition for substance administration
+            .node('templateId')
+                .attr({root: "2.16.840.1.113883.10.20.22.4.25"}).parent()
+            .node('criterion')
+                .node('code')
+                    .attr({code: precondition["code"]["code"]})
+                    .attr({codeSystem: "2.16.840.1.113883.5.4"}).parent()
+                .node('value')
+                    .attr({"xsi:type": "CE"})
+                    .attr({code: precondition["value"]["code"]})
+                    .attr({codeSystem: "2.16.840.1.113883.6.96"})
+                    .attr({displayName: "Wheezing"}).parent()
+            .parent()
+        .parent()
+    }
+}
+&nbsp;
+module.exports.reverseTable = reverseTable;
+module.exports.attempt = attempt;
+module.exports.insertObservation = insertObservation;
+module.exports.header = header;
+module.exports.addr = addr;
+module.exports.representedOrganization = representedOrganization;
+module.exports.performerRevised = performerRevised;
+module.exports.getTimes = getTimes;
+module.exports.substanceAdministration = substanceAdministration;
+module.exports.consumable = consumable;
+module.exports.entryRelationship = entryRelationship;
+module.exports.getNumEntries = getNumEntries;
+module.exports.tel = tel;
+module.exports.id = id;
+module.exports.code = code;
+module.exports.name = name;
+module.exports.value = value;
+module.exports.routeCode = routeCode;
+module.exports.doseQuantity = doseQuantity;
+&nbsp;
+module.exports.maritalStatusCode = maritalStatusCode;
+module.exports.guardianPerson = guardianPerson;
+module.exports.languageCommunication = languageCommunication;
+module.exports.participant = participant;
+module.exports.indicationConstraint = indicationConstraint;
+module.exports.medication_administration = medication_administration;
+module.exports.precondition = precondition;
+module.exports.manufacturedProduct = manufacturedProduct;
+module.exports.effectiveTime = effectiveTime;
+module.exports.playingEntity = playingEntity;
+module.exports.header_v2 = header_v2;
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 15 2014 11:50:51 GMT-0400 (EDT)</div>
+</div>
+
+<script src="../../../../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

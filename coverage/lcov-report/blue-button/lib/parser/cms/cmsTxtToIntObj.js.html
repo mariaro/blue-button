@@ -1,0 +1,1750 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for blue-button/lib/parser/cms/cmsTxtToIntObj.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1>Code coverage report for <span class="entity">blue-button/lib/parser/cms/cmsTxtToIntObj.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">91.39% <small>(244 / 267)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">69.7% <small>(46 / 66)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">93.75% <small>(15 / 16)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">91.39% <small>(244 / 267)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">blue-button/lib/parser/cms/</a> &#187; cmsTxtToIntObj.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">18</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">608</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">608</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-yes">19</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">30</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-yes">17</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">197</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">197</span>
+<span class="cline-any cline-yes">197</span>
+<span class="cline-any cline-yes">197</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">197</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">197</span>
+<span class="cline-any cline-yes">197</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-yes">13</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">184</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">137</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">137</span>
+<span class="cline-any cline-yes">137</span>
+<span class="cline-any cline-yes">137</span>
+<span class="cline-any cline-yes">137</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">137</span>
+<span class="cline-any cline-yes">137</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-yes">29</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">132</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-yes">5</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">28</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">362</span>
+<span class="cline-any cline-yes">724</span>
+<span class="cline-any cline-yes">724</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">362</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-yes">1162</span>
+<span class="cline-any cline-yes">1162</span>
+<span class="cline-any cline-yes">1187</span>
+<span class="cline-any cline-yes">780</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1162</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">780</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-yes">384</span>
+<span class="cline-any cline-yes">384</span>
+<span class="cline-any cline-yes">407</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">384</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-yes">382</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">56</span>
+<span class="cline-any cline-yes">56</span>
+<span class="cline-any cline-yes">56</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">//Byung Joo Shin, Amida Tech
+&nbsp;
+module.exports.getIntObj = getIntObj;
+module.exports.getTitles = getTitles;
+&nbsp;
+//main function that will be used to getIntObj
+&nbsp;
+function getIntObj(cmsString) {
+&nbsp;
+    var rawData = clean(cmsString);
+    //might need to convert input ASCII, or have actual strings in the c
+    //code be converted to utf8 later
+    var documentObj = {};
+    var sectionArray = separateSections(rawData);
+    for (var section in sectionArray) {
+        var sectionObj = convertToObject(sectionArray[section]);
+        var sectionObjTitle = sectionObj.sectionTitle;
+        var sectionObjBody = sectionObj.sectionBody;
+        documentObj[sectionObjTitle] = sectionObjBody;
+    }
+    //console.log(JSON.stringify(documentObj, null, 4));
+    return documentObj;
+}
+&nbsp;
+function clean(cmsString) {
+&nbsp;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (cmsString.indexOf('\r\n') &gt;= 0) {
+<span class="cstat-no" title="statement not covered" >        cmsString = cmsString.replace(/\r\n/g, '\n');</span>
+<span class="cstat-no" title="statement not covered" >        cmsString = cmsString.replace(/\r/g, '\n');</span>
+        //cmsString=cmsString.replace(/\n\n/g, '\n');
+<span class="cstat-no" title="statement not covered" >        return cmsString;</span>
+    }
+&nbsp;
+    return cmsString;
+}
+&nbsp;
+//Parses string into sections, then returns the array of strings for
+//each section
+&nbsp;
+function separateSections(data) {
+    //Separated regular expression into many distinct pieces
+&nbsp;
+    //specical metaMatchCode goes first.
+&nbsp;
+    // 1st regular expression for meta, need to do
+    var metaMatchCode = '^(-).[\\S\\s]+?(\\n){2,}';
+&nbsp;
+    /* 2nd regular expression for claims, because the structure of claims is
+  unique */
+    var claimsHeaderMatchCode = '(-){4,}(\\n)*Claim Summary(\\n){2,}(-){4,}';
+    var claimsBodyMatchCode = '([\\S\\s]+Claim[\\S\\s]+)+';
+    var claimsEndMatchCode = '(?=((-){4,}))';
+    var claimsMatchCode = claimsHeaderMatchCode +
+        claimsBodyMatchCode + claimsEndMatchCode;
+&nbsp;
+    //this match code is for all other sections
+    var headerMatchCode = '(-){4,}[\\S\\s]+?(\\n){2,}(-){4,}';
+    var bodyMatchCode = '[\\S\\s]+?';
+    var endMatchCode = '(?=((-){4,}))';
+    var sectionMatchCode = headerMatchCode + bodyMatchCode + endMatchCode;
+&nbsp;
+    /* The regular expression for everything, search globally and
+  ignore capitalization */
+    var totalMatchCode = claimsMatchCode + "|" + sectionMatchCode;
+    var totalRegExp = new RegExp(totalMatchCode, 'gi');
+    var matchArray = data.match(totalRegExp);
+    return matchArray;
+}
+&nbsp;
+//converts each section to an  object representation
+&nbsp;
+function convertToObject(sectionString) {
+&nbsp;
+    var sectionObj = {};
+    //get the section title(get it raw, clean it)
+    var sectionTitleRegExp = /(-){3,}([\S\s]+?)(-){3,}/;
+    var sectionRawTitle = sectionString.match(sectionTitleRegExp)[0];
+    var sectionTitle = cleanUpTitle(sectionRawTitle).toLowerCase();
+&nbsp;
+    //get the section body
+    var sectionBody;
+    sectionObj.sectionTitle = sectionTitle;
+    //these are very special "edge" cases
+&nbsp;
+    //meta data/information about document in the beginning of the doc
+    if (sectionTitle.toLowerCase().indexOf("personal health information") &gt;= 0) {
+        delete sectionObj.sectionTitle;
+        sectionObj.sectionTitle = 'meta';
+        sectionBody = getMetaBody(sectionString);
+    } else if (sectionTitle.toLowerCase().indexOf("claim") &gt;= 0) {
+        sectionBody = getClaimsBody(sectionString);
+    } else {
+        sectionBody = getSectionBody(sectionString);
+    }
+    sectionObj.sectionBody = sectionBody;
+    return sectionObj;
+}
+&nbsp;
+//Gets all section titles given the entire data file string
+&nbsp;
+<span class="fstat-no" title="function not covered" >function getTitles(fileString) {</span>
+<span class="cstat-no" title="statement not covered" >    var headerMatchCode = '(-){4,}[\\S\\s]+?(\\n){2,}(-){4,}';</span>
+<span class="cstat-no" title="statement not covered" >    var headerRegExp = new RegExp(headerMatchCode, 'gi');</span>
+<span class="cstat-no" title="statement not covered" >    var rawTitleArray = fileString.match(headerRegExp);</span>
+<span class="cstat-no" title="statement not covered" >    var titleArray = [];</span>
+<span class="cstat-no" title="statement not covered" >    if (rawTitleArray === null)</span>
+<span class="cstat-no" title="statement not covered" >        return null;</span>
+<span class="cstat-no" title="statement not covered" >    for (var i = 0, len = rawTitleArray.length; i &lt; len; i++) {</span>
+<span class="cstat-no" title="statement not covered" >        var tempTitle = cleanUpTitle(rawTitleArray[i]);</span>
+        //exception to the rule, claim lines
+<span class="cstat-no" title="statement not covered" >        if (tempTitle.toLowerCase().indexOf("claim lines for claim number") &lt; 0 &amp;&amp;</span>
+            tempTitle.length &gt; 0) {
+<span class="cstat-no" title="statement not covered" >            titleArray[i] = tempTitle;</span>
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    return titleArray;</span>
+}
+&nbsp;
+//cleans up the title string obtained from the regular expression
+&nbsp;
+function cleanUpTitle(rawTitleString) {
+    /*dashChar is most commonly the dash of the title string, or a
+  the first repeating character surrounding the title */
+    var dashChar = rawTitleString.charAt(0);
+    //beginning and ending index of the dash
+    var dashBegIndex = 0;
+    var dashEndIndex = rawTitleString.lastIndexOf(dashChar);
+&nbsp;
+    //loop through to find indicies without continous dashes
+    while (rawTitleString.charAt(dashBegIndex) == (dashChar || <span class="branch-1 cbranch-no" title="branch not covered" >'\n')</span>) {
+        dashBegIndex++;
+    }
+    while (rawTitleString.charAt(dashEndIndex) == (dashChar || <span class="branch-1 cbranch-no" title="branch not covered" >'\n')</span>) {
+        dashEndIndex--;
+    }
+&nbsp;
+    var titleString = rawTitleString.slice(dashBegIndex + 1, dashEndIndex - 1);
+    titleString = trimStringEnds(titleString, ['\n', '-']);
+    return titleString;
+}
+&nbsp;
+//parses the section body into an object
+&nbsp;
+function getSectionBody(sectionString) {
+    /*first, use regular expressions to parse the section body into different
+  objects */
+    var sectionBody = {};
+    var sectionBodyData = [];
+    var objectFromBodyRegExp = /-*(\n){2,}(?!-{4,})[\S\s,]+?((?=((\n){3,}?))|\n\n$)/gi;
+    //or go to the end of the string.
+    var objectStrings = sectionString.match(objectFromBodyRegExp);
+    //process each section object (from string to an actual object)
+    for (var obj in objectStrings) {
+        var sectionChild = processSectionChild(objectStrings[obj]);
+&nbsp;
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!isEmpty(sectionChild)) {
+            if ('source' in sectionChild) {
+                sectionBody.source = sectionChild.source;
+            } else {
+                sectionBodyData.push(sectionChild);
+            }
+&nbsp;
+        }
+    }
+    sectionBody.data = sectionBodyData;
+    return sectionBody;
+&nbsp;
+}
+&nbsp;
+function getClaimsBody(sectionString) {
+    var sectionBody = {};
+    var sectionBodyData = [];
+    //this is for claim lines of only one type
+    //this is for the claim lines with dashes in between
+    var claimLineMatchCode =
+        '(?:\\n*)(Claim Lines for Claim Number)[\\S\\s]+?\\n*-{4,}[\\S\\s]+?(?=(\\n{3,}Claim Number)|(\\n*-{3,}))';
+    //this regular expression is for the regular claims with spaces.
+    var claimMatchCode = '(?:(\\n{3,}))(Claim Number)[\\S\\s]+?(?:\\n*-{4,})';
+    var sourceMatchCode = '-*(\\n){2,}(?!-{4,})Source[\\S\\s,]+?((?=((\\n){3,}?))|\\n\\n$)';
+&nbsp;
+    var totalClaimMatchCode = claimLineMatchCode + '|' + claimMatchCode;
+    var totalClaimsRegExp = new RegExp(totalClaimMatchCode, 'gi');
+    //or go to the end of the string
+    var sourceMatchRegExp = new RegExp(sourceMatchCode, 'gi');
+    var sourceString = sectionString.match(sourceMatchRegExp);
+&nbsp;
+    var objectStrings = sectionString.match(totalClaimsRegExp);
+&nbsp;
+    objectStrings = sourceString.concat(objectStrings);
+    var claimStrings = []; //this is where children should go by default
+    var claimLineStrings = [];
+    //sift between claims and claim lines
+    var isClaim = true;
+    for (var x = 0; x &lt; objectStrings.length; x++) {
+        var claimsLineCheck = /claim lines for claim number/i;
+        if (claimsLineCheck.test(objectStrings[x])) {
+            claimLineStrings.push(objectStrings[x]);
+        } else {
+            claimStrings.push(objectStrings[x]);
+        }
+    }
+    /* claims children keeps track of all the object information, claimsNumberList
+    as a set that keeps track of the claims numbers so far */
+    var claimsChildren = {};
+    var claimsLineChildren = {};
+    //process each claim
+    for (var obj in claimStrings) {
+        var child = processClaimsSectionChild(claimStrings[obj]);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!isEmpty(child)) {
+            if ('source' in child) { //take into account the source tag
+                sectionBody.source = child.source;
+            } else {
+                var claimNumber = child['claim number'];
+                claimsChildren[claimNumber] = child;
+            }
+        }
+    }
+    //process each batch of claim lines
+    for (var obj in claimLineStrings) {
+        var sectionChild = processClaimsLineChild(claimLineStrings[obj]);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!isEmpty(sectionChild)) {
+            <span class="missing-if-branch" title="if path not taken" >I</span>if ('source' in sectionChild) {
+<span class="cstat-no" title="statement not covered" >                sectionBody.source = sectionChild.source;</span>
+            } else {
+                var claimNumber = sectionChild.claimNumber;
+                <span class="missing-if-branch" title="if path not taken" >I</span>if (claimsLineChildren[claimNumber] !== undefined) {
+<span class="cstat-no" title="statement not covered" >                    for (var x = 0; x &lt; sectionChild.data.length; x++) {</span>
+<span class="cstat-no" title="statement not covered" >                        claimsLineChildren[claimNumber].push(sectionChild.data[x]);</span>
+                    }
+                } else {
+                    claimsLineChildren[claimNumber] = sectionChild.data;
+                }
+&nbsp;
+            }
+        }
+    }
+    //merge two results together
+    for (var x in claimsChildren) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (x in claimsLineChildren) {
+            claimsChildren[x].claimLines = claimsLineChildren[x];
+            delete claimsLineChildren[x];
+        }
+    }
+    //reformat claim lines to claims objects
+    for (var x in claimsLineChildren) {
+        var claimObj = {};
+        claimObj['claim number'] = x;
+        claimObj.claimLines = claimsLineChildren[x];
+        claimsChildren[x] = claimObj;
+    }
+&nbsp;
+    for (var x in claimsChildren) {
+        sectionBodyData.push(claimsChildren[x]);
+    }
+&nbsp;
+    //add all the objects to section body data
+    sectionBody.data = sectionBodyData;
+    return sectionBody;
+&nbsp;
+}
+&nbsp;
+//functions for specific meta characters
+&nbsp;
+function getMetaBody(sectionString) {
+    var sectionBody = {};
+    var sectionBodyObj = {};
+    var metaBodyCode = /-{2,}((\n*?\*{3,}[\S\s]+\*{3,})|(\n{2,}))[\S\s]+?\n{3,}/gi;
+    var objectStrings = sectionString.match(metaBodyCode);
+    for (var obj in objectStrings) {
+        var sectionChild = processMetaChild(objectStrings[obj]);
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (!isEmpty(sectionChild)) {
+            sectionBodyObj.type = 'cms';
+            //get only the number from version
+            var versionRegExp = /\(v[\S\s]+?\)/
+            var version = sectionChild[0].match(versionRegExp)[0];
+            version = trimStringEnds(version, ['(', ')', 'v']);;
+            sectionBodyObj.version = version;
+            sectionBodyObj.timestamp = sectionChild[1];
+        }
+    }
+    sectionBody.data = [sectionBodyObj];
+    return sectionBody;
+&nbsp;
+}
+&nbsp;
+function processMetaChild(objectString) {
+    var obj = {};
+    var metaValueCode = /(\n{2,}?)([\S\s]+?)(?=\n{2,}?)/gi;
+    var metaValues = objectString.match(metaValueCode);
+    var counter = 0;
+    for (var value in metaValues) {
+        var cleanedMetaValue = metaValues[value].replace(/\n/g, '');
+        if (cleanedMetaValue.length !== 0) {
+            obj[value.toLowerCase()] = cleanedMetaValue;
+        }
+        counter++;
+    }
+    return obj;
+}
+/*processes objects with keys and values in each section((i.e. drug 1 of
+demographics */
+&nbsp;
+function processSectionChild(objectString) {
+    //regular expression that matches key value pairs
+    var obj = {};
+    var objArray = [];
+    var topObj = obj;
+    var keyValuePairRegExp = /(\n){1,}[\S\s,]+?(:)[\S\s]+?(?=((\n){1,})|$)/gi;
+    var keyValuePairArray = objectString.match(keyValuePairRegExp);
+&nbsp;
+    var multiKeyCount = {};
+    /*this is to deal with multiple same keys from
+  one child of a section*/
+    //unusual steps are required to parse meta data and claims summary
+    for (var s in keyValuePairArray) {
+        //clean up the key pair
+        keyValuePairString = trimStringEnds(keyValuePairArray[s], ['\n']);
+        //split each string by the :, the result is an array of size two
+        keyValuePair = keyValuePairString.split(/:(.*)/);
+        var key = removeUnwantedCharacters(keyValuePair[0].trim(), ['\n', '-']);
+        var value = keyValuePair[1].trim();
+        //reassign tthe key based on how many duplicates tehre are
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (key.length &lt;= 0) {
+<span class="cstat-no" title="statement not covered" >            break;</span>
+        }
+        key = key.toLowerCase();
+        if (key in obj) {
+            if (!(key in multiKeyCount)) {
+                multiKeyCount[key] = 1;
+            }
+            var newKey = key + " " + String(multiKeyCount[key]);
+            obj[newKey] = value;
+            multiKeyCount[key] = multiKeyCount[key] + 1;
+        } else {
+            obj[key] = value;
+        }
+    }
+    return obj;
+}
+&nbsp;
+//function to process claim section of the document
+function processClaimsLineChild(objectString) {
+    var claimLineObj = {};
+    var obj = {};
+    var objArray = [];
+    var keyValuePairRegExp = /(\n){1,}[\S\s,]+?(:)[\S\s]+?(?=((\n){1,})|$)/gi;
+    var keyValuePairArray = objectString.match(keyValuePairRegExp);
+&nbsp;
+    //unusual steps are required to parse meta data and claims summary
+    for (var s in keyValuePairArray) {
+        //clean up the key value pair
+        keyValuePairString = trimStringEnds(keyValuePairArray[s], ['\n']);
+        //split each string by the :, the result is an array of size two
+        keyValuePair = keyValuePairString.split(/:(.*)/);
+        var key = removeUnwantedCharacters(keyValuePair[0].trim(), ['\n', '-']);
+        key = key.toLowerCase();
+        var value = keyValuePair[1].trim();
+&nbsp;
+        var claimLineCheckRegExp = /claim lines/i;
+        if (claimLineCheckRegExp.test(key)) {
+            claimLineObj.claimNumber = value;
+            continue;
+        }
+&nbsp;
+        if (value.length === 0) {
+            value = null;
+        }
+        //create a new object for line number
+        if (key in obj) {
+            objArray.push(obj);
+            obj = {};
+        }
+        obj[key] = value;
+    }
+    objArray.push(obj);
+    claimLineObj.data = objArray;
+    return claimLineObj;
+}
+&nbsp;
+function processClaimsSectionChild(objectString) {
+    //regular expression that matches key value pairs
+    var obj = {};
+    var objArray = [];
+    var topObj = obj;
+    var keyValuePairRegExp = /(\n){1,}[\S\s,]+?(:)[\S\s]+?(?=((\n){1,})|$)/gi;
+    var keyValuePairArray = objectString.match(keyValuePairRegExp);
+    //unusual steps are required to parse meta data and claims summary
+&nbsp;
+    for (var s in keyValuePairArray) {
+        //clean up the key pair
+        keyValuePairString = trimStringEnds(keyValuePairArray[s], ['\n']);
+&nbsp;
+        //split each string by the :, the result is an array of size two
+        keyValuePair = keyValuePairString.split(/:(.*)/);
+        var key = removeUnwantedCharacters(keyValuePair[0].trim(), ['\n', '-']);
+        key = key.toLowerCase();
+        var value = keyValuePair[1].trim();
+&nbsp;
+        if (value.length === 0) {
+            value = null;
+        }
+        //create a new object for line number
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (key in obj) {
+<span class="cstat-no" title="statement not covered" >            objArray.push(obj);</span>
+<span class="cstat-no" title="statement not covered" >            obj = {};</span>
+        }
+        obj[key] = value;
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (objArray.length &gt; 0) {
+<span class="cstat-no" title="statement not covered" >        objArray.push(obj);</span>
+<span class="cstat-no" title="statement not covered" >        return objArray;</span>
+    } else {
+        return obj;
+    }
+}
+&nbsp;
+/*remove a list of unwanted characters from a given string, globally(as in
+  not only the ends */
+&nbsp;
+function removeUnwantedCharacters(cleanedString, unwantedCharArray) {
+    for (var x in unwantedCharArray) {
+        var unwantedCharRegExp = new RegExp(unwantedCharArray[x], 'g');
+        cleanedString = cleanedString.replace(unwantedCharRegExp, '');
+    }
+    return cleanedString;
+}
+&nbsp;
+/*cleans up keys and values from the beginning and end of the string */
+&nbsp;
+function trimStringEnds(keyValueString, unwantedCharArray) {
+    var unwantedBegCharIndex = 0;
+    var unwantedEndCharIndex = keyValueString.length - 1;
+    var charIsUnwanted;
+    var keepGoing = true; //keep traversing the string
+    //starting from the beginning of the string
+    while (keepGoing) {
+        charIsUnwanted = false;
+        for (var x = 0; x &lt; unwantedCharArray.length; x++) {
+            if (keyValueString.charAt(unwantedBegCharIndex) == unwantedCharArray[x]) {
+                charIsUnwanted = true;
+            }
+        }
+        if (!charIsUnwanted) {
+            keepGoing = false;
+        } else {
+            unwantedBegCharIndex++;
+        }
+    }
+    //now start at the end
+    keepGoing = true;
+    while (keepGoing) {
+        charIsUnwanted = false;
+        for (var y = 0; y &lt; unwantedCharArray.length; y++) {
+            if (keyValueString.charAt(unwantedEndCharIndex) == unwantedCharArray[y]) {
+                charIsUnwanted = true;
+            }
+        }
+        if (!charIsUnwanted) {
+            keepGoing = false;
+        } else {
+            unwantedEndCharIndex--;
+        }
+    }
+    keyValueString = keyValueString.slice(unwantedBegCharIndex, unwantedEndCharIndex + 1);
+    return keyValueString;
+}
+&nbsp;
+//tells whether object is empty or not
+&nbsp;
+function isEmpty(obj) {
+    for (var key in obj) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (obj.hasOwnProperty(key))
+            return false;
+    }
+<span class="cstat-no" title="statement not covered" >    return true;</span>
+}
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 15 2014 11:50:51 GMT-0400 (EDT)</div>
+</div>
+
+<script src="../../../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>

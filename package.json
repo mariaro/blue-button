@@ -1,0 +1,79 @@
+{
+  "name": "blue-button",
+  "version": "1.1.0-beta.11",
+  "description": "Blue Button (CCDA) to JSON Parser.",
+  "main": "/index.js",
+  "directories": {
+    "doc": "doc",
+    "lib": "lib"
+  },
+  "scripts": {
+    "prepublish": "echo \"Prepublish Build script should go here.\"",
+    "test": "grunt test"
+  },
+  "author": {
+    "name": "Dmitry Kachaev",
+    "email": "dmitry@amida-tech.com"
+  },
+  "contributors": [
+    {
+      "name": "Matthew McCall",
+      "email": "matt@amida-tech.com"
+    },
+    {
+      "name": "Afsin Ustundag",
+      "email": "afsin.ustundag@us.pwc.com"
+    }
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "dependencies": {
+    "blue-button-meta": "^1.1.0",
+    "deep-equal": "*",
+    "libxmljs": "*",
+    "node-uuid": "*",
+    "underscore": "1.6.x",
+    "winston": "^0.7.3",
+    "xdate": "*",
+    "z-schema": "^2.4.8"
+  },
+  "devDependencies": {
+    "assert": "1.1.x",
+    "chai": "1.8.x",
+    "chai-datetime": "1.1.x",
+    "coveralls": "~2.10.0",
+    "execSync": "^1.0.1-pre",
+    "grunt": "0.4.x",
+    "grunt-contrib-jshint": "0.8.x",
+    "grunt-contrib-watch": "0.6.x",
+    "grunt-coveralls": "*",
+    "grunt-express-server": "0.4.x",
+    "grunt-istanbul-coverage": "*",
+    "grunt-jsbeautifier": "^0.2.7",
+    "grunt-mocha-test": "0.8.x",
+    "mocha": "1.17.x",
+    "mocha-lcov-reporter": "0.0.1",
+    "path": "^0.4.9",
+    "should": "3.1.x",
+    "walk": "^2.3.3",
+    "winston": "^0.7.3",
+    "xmldom": "^0.1.19"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/amida-tech/bluebutton.git"
+  },
+  "keywords": [
+    "bluebutton"
+  ],
+  "bugs": {
+    "url": "https://github.com/amida-tech/blue-button/issues"
+  },
+  "homepage": "https://github.com/amida-tech/blue-button",
+  "readme": "blue-button\n==========\n\nBlue Button JavaScript (Node.js) library\n\n[![NPM](https://nodei.co/npm/blue-button.png)](https://nodei.co/npm/blue-button/)\n\n[![Build Status](https://travis-ci.org/amida-tech/blue-button.svg)](https://travis-ci.org/amida-tech/blue-button)\n[![Coverage Status](https://coveralls.io/repos/amida-tech/blue-button/badge.png)](https://coveralls.io/r/amida-tech/blue-button)\n\n![blue-button.js](./docs/blue-button-js.png)\n\n## Library interfaces/APIs\n\nThis library provides following functionality\n\n- Parse XML documents (via libxmljs)\n- Sense type of data (e.g. CCDA, C32, etc)\n- Parse CCDA into JSON representation\n\t- Parse CCDA elements (sections) into JSON representation\n- Generating JSON object based on data model\n\n### Usage example\n\nRequire blue-button module\n\n``` javascript\nvar bb = require(\"blue-button\")\n```\n\nLoad some XML and parse it\n\n``` javascript\nvar data = \"some CCDA.xml data here...\";\n\n//parse xml into JS object\nvar doc = bb.parseXml(data);\n```\n\nCheck XML parsing errors\n\n``` javascript\nconsole.log(doc.errors);\n```\n\nshould be:\n\n``` javascript\n[]\n``` \n\nhere is XML itself:\n\n``` javascript\nconsole.log(doc.toString());\n```\n\nshould be:\n\n``` xml\n<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n<?xml-stylesheet type=\"text/xsl\" href=\"CDA.xsl\"?>\n<!-- Title: US_Realm_Header_Template -->\n<ClinicalDocument xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns=\"urn:hl7-org:v3\" xmlns:cda=\"urn:hl7-org:v3\" xmlns:sdtc=\"urn:hl7-org:sdtc\">\n  <!-- ******************************************************** CDA Header \n\t\t******************************************************** -->\n  <realmCode code=\"US\"/>\n  <typeId root=\"2.16.840.1.113883.1.3\" extension=\"POCD_HD000040\"/>\n  <!-- US General Header Template -->\n  <templateId root=\"2.16.840.1.113883.10.20.22.1.1\"/>\n  <!-- *** Note: The next templateId, code and title will differ depending \n\t\ton what type of document is being sent. *** -->\n  <!-- conforms to the document specific requirements -->\n  <templateId root=\"2.16.840.1.113883.10.20.22.1.2\"/>\n  \n  ...and so on\n```\n\nLet's sense document type from parsed XML:\n\n``` javascript\n//get document type (e.g. CCDA) of parsed document\nvar type = bb.senseXml(doc);\n\nconsole.log(type);\n```\n\ngetting:\n\n``` javascript\n{ type: 'ccda' }\n```\n\nLet's sense document type from string with health data:\n\n``` javascript\n//get document type (e.g. CCDA) of document from string (and return parsed xml if it is xml based type)\nvar result = bb.senseString(data);\n\n//printing result:\nconsole.log(result);\n```\n\ngetting type as well as parsed XML for later user:\n\n``` javascript\n{ type: 'ccda', xml: { errors: [] } }\n//xml \"errors\" is just default print of libxmljs parsed XML object\n\n//in case of JSON stringified input, it will return {type: 'json', json: [json object here]}\n```\n\nSensing CMS Blue Button data in text file:\n\n``` javascript\n//get document type (e.g. CMS) of document from string (and return format version)\nvar result = bb.senseString(data);\n\n//printing result:\nconsole.log(result); \n```\ngetting:\n\n``` javascript\n{ type: 'cms', version: '2.0' }\n```\n\ngetting type as well as parsed XML for later user:\n\n``` javascript\n\n{ type: 'ccda', xml: { errors: [] } }\n//xml \"errors\" is just default print of libxmljs parsed XML object\n\n//in case of JSON stringified input, it will return {type: 'json', json: [json object here]}\n\n```\n\nParsing into JSON data model from CMS text file\n\n``` javascript\n//read in the file\nvar textString = fs.readFileSync(\"cms_sample.txt\").toString(); \n\n//convert the string text file into blue button model\nvar result = bb.parseText(textString); \n\nconsole.log(result);\n```\ngetting:\n\n``` javascript\n\n{ data: \n   { demographics: \n      { name: [Object],\n        dob: [Object],\n        email: [Object],\n        phone: [Object],\n        address: [Object] },\n     vitals: [ [Object], [Object] ],\n     results: [ [Object] ],\n     medications: [ [Object], [Object] ],\n     allergies: [ [Object], [Object] ],\n     immunizations: [ [Object], [Object], [Object] ],\n     problems: [ [Object], [Object] ],\n     insurance: [ [Object], [Object], [Object], [Object], [Object], [Object] ],\n     claims: [ [Object], [Object], [Object], [Object], [Object] ] },\n  meta: \n   { type: 'cms',\n     version: '2.0',\n     timestamp: { date: '2013-03-16T05:10:00Z', precision: 'minute' },\n     sections: ['demographics', ..., 'claims'] } }\n\n``` \n\nParsing into JSON data model from XML or from string\n\n``` javascript\n//convert Xml document into JSON\nvar result = bb.parseXml(doc);\n\n//convert string into JSON\nvar result = bb.parseString(data);\n\nconsole.log(result);\n```\n\ngetting:\n\n``` javascript\n{ data: \n   { demographics: \n      { name: [Object],\n        dob: [Object],\n        ...\n        birthplace: [Object],\n        guardians: [Object] },\n     vitals: [ [Object], [Object], [Object], [Object], [Object], [Object] ],\n     results: [ [Object] ],\n     medications: [ [Object] ],\n     encounters: [ [Object] ],\n     allergies: [ [Object], [Object], [Object] ],\n     immunizations: [ [Object], [Object], [Object], [Object] ],\n     socialHistory: [ [Object] ],\n     problems: [ [Object], [Object] ],\n     procedures: [ [Object], [Object], [Object] ] },\n  meta: {\n        version: \"1.1.0-beta.1\",\n        sections: [\n            \"demographics\",\n            \"vitals\",\n            \"results\",\n            \"medications\",\n            \"encounters\",\n            \"allergies\",\n            \"immunizations\",\n            \"social_history\",\n            \"problems\",\n            \"procedures\",\n            \"plan_of_care\",\n            \"payers\"\n        ]\n  },\n  errors: \n   [ 'nullFlavor alert:  missing but required streetLines in Address -> Patient -> CCD',\n     'nullFlavor alert:  missing but required value in PhysicalQuantity -> MedicationAdministration -> Prescription -> MedicationsSection -> CCD'\n     ] }\n```\n\nAlso, see [/example](./example) for example above as well as how to parse individual sections.\n***\n\n## CCDA Generation: Introduction\nThis module converts data in JSON format (originally parsed from a CCDA) back to CCDA/blue-button format. The module determines the \nsection template to which the JSON data belongs to, runs the data through the appropriate templater, and generates the corresponding CCDA/blue-button section. An entire CCDA document can be generated by iteravitely running the JSON data through the templaters for each section. \n\nThe API exposes genWholeCCDA() for this purpose, which takes in CCDA data in JSON format as a parameter and converts it into CCDA/XML.\n\nThe module uses libxmljs for its templaters and uses a JS XML DOM implementation (https://github.com/jindw/xmldom) to traverse the generated and expected XML documents for testing and compare them by node (tagName) and by attribute and value. \n\n## CCDA Generation: Testing\nA suite of tests and a test class (test/test-generator and test/test-lib, respectively) help in verifying that the generated CCDA is accurate. Tests include: \n  - parsing ccda to json, generating back the ccda from json, and comparing the original and generated ccdas for differences. \n  - parsing, generating, and parsing again, comparing the first parsed JSON data with the second parsed JSON data for equality. \n  - Comparing a specific, single section of CCDA to the original specific, single section, achieving testing granularity. \n  - Testing the generator against the entire corpora of ccda documents at: https://github.com/chb/sample_ccdas using the internal     ccda_explorer module\n  \nThe testing class/library provides methods to compare two XML/CCDA documents by recursively walking the XML document tree and comparing two documents node-by-node. Assertion-based or diff-based testing can be used with this library by setting the appropriate flags. The default settings ignore comments, whitespace, newlines, tab or text nodes. Here is an example of diff-based testing output after testing the CCDA Procedures Section:\n\n````\nPROCESSING PROCEDURES\nError: Generated number of child nodes different from expected (generated: 0 at lineNumber: 8, expected: 1 at lineNumber:12\nError: Generated number of child nodes different from expected (generated: 11 at lineNumber: 10, expected: 10 at lineNumber:32\nAttributes mismatch. Different lengths: 1 attributes but expected 0 attributes @ lineNumber: 70, 94\nError: Generated number of child nodes different from expected (generated: 10 at lineNumber: 71, expected: 11 at lineNumber:95\nAttributes mismatch. Different lengths: 1 attributes but expected 0 attributes @ lineNumber: 119, 149\n\nError: Attributes mismatch: Encountered: moodCode=\"EVN\" but expected: moodCode=\"INT\" @ lineNumber: 120, 150\nError: Encountered different tagNames: Encountered <code> but expected <priorityCode>, lineNumber: 130, 161\nError: Generated number of child nodes different from expected (generated: 4 at lineNumber: 151, expected: 5 at lineNumber:182\nERRORS: 8\n````\n\n\n\n**Alterable flags (in test-lib.js)**:   \n  -PROMPT_TO_SKIP: If set to true, will prompt the user to either skip or not skip the failed test.  \n  -DIFF (default): If set to true, will continue execution even upon failing a test and will output all of the errors/differences to the console. This is the default setting.  \n\n**Alterable settings (testXML.error_settings in test-lib.js)**:   \n  -\"silence_cap\": If set to true, will silence the output of capitalization errors. False by default.      \n  -\"silence_len\": If set to true, will silence the output of attribute length errors (i.e. actual node has 2 attributes but expected node has 3 attributes). False by default.\n\n**Test suite settings**:   \n  -TEST_CCDA_SAMPLES: uses ccda-explorer to test against sample_ccdas    \n  -TEST_CCD: tests against one generic sample ccda   \n  -TEST_SECTIONS: tests each section individually  \n\n\n***\n\n\n## Link to data model docs in docs/model.md\n\nDetailed description of JSON based data model (tied to CCDA spec)\n\n[JSON based Blue Button data model](./docs/model.md)\n\n[CMS Documentation](./docs/cms.md)\n\n## Goals\n\n- Full support of CCDA\n- Ability to extend to support other data formats (e.g. C32)\n- Solid, well-documented JSON-based data model for patient health data\n- Modularity - easy to extend (both parser and data model) in the future\n- Node.js support\n- Browser support (sometime later)\n- Speed of parsing\n- Well tested on entire corpora of CCDA samples from https://github.com/jmandel/sample_ccdas\n\n## Roadmap (End of May, Release 1.0)\n\n- First file format is the \"Continuity of Care Document\", a Blue Button format type that capture’s entire patients medical history.  The CCD is comprised of five required sections (allergies, medications, problems, procedures, lab results) and three optional sections (encounters, immunizations, vitals).\n- CCDA JSON data model is fully defined as separate library with validation support\n- bluebutton.js parser is rewriten for speed and support of updated CCDA JSON data model\n- Uses libxmljs parser (under Node.js environment) or browser based parser for XML\n- Comprehensive test for Node.js module (with Mocha/Chai)\n\n## Future Roadmap\n\n- C32 support reintroduced\n- Full browser support for all functionality\n- Merge back into bluebutton.js repo\n- Comprehensive test for browser environment\n- After initial re-write we are planning to reintroduce this \"fork\" back into bluebutton.js community.\n\n## Contributing\n\nContributors are welcome. See issues https://github.com/amida-tech/blue-button/issues\n\n## Release Notes\n\nSee release notes [here] (./RELEASENOTES.md)\n\n## License\n\nLicensed under [Apache 2.0](./LICENSE)\n\nProject was influenced by and used some code from:\n\n[bluebutton.js library](https://github.com/blue-button/bluebutton.js/) licensed under [MIT](https://github.com/blue-button/bluebutton.js/blob/master/LICENSE.md)\n\n[Josh Mandel's ccda-to-json library](https://github.com/jmandel/ccda-to-json) licensed under [Apache 2.0] (https://github.com/jmandel/ccda-to-json/blob/master/LICENSE)\n\n",
+  "readmeFilename": "README.md",
+  "_id": "blue-button@1.1.0-beta.11",
+  "_from": "blue-button@1.1.0-beta.11"
+}

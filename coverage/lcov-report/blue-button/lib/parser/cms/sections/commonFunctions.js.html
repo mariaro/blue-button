@@ -1,0 +1,1828 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for blue-button/lib/parser/cms/sections/commonFunctions.js</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../../../../../prettify.css">
+
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Helvetica Neue, Helvetica,Arial;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 10em;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Consolas, Menlo, Monaco, monospace;
+            margin: 0;
+            padding: 0;
+            line-height: 14px;
+            font-size: 14px;
+            -moz-tab-size: 2;
+            -o-tab-size:  2;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { text-decoration: none; color: #000; }
+        div.coverage-summary a:visited { text-decoration: none; color: #333; }
+        div.coverage-summary a:hover { text-decoration: underline; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: url("https://yui-s.yahooapis.com/3.6.0/build/datatable-sort/assets/skins/sam/sort-arrow-sprite.png") no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header medium">
+    <h1>Code coverage report for <span class="entity">blue-button/lib/parser/cms/sections/commonFunctions.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">62.32% <small>(172 / 276)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">48.84% <small>(63 / 129)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">76.47% <small>(13 / 17)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">62.32% <small>(172 / 276)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">blue-button/lib/parser/cms/sections/</a> &#187; commonFunctions.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">6</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">47</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-yes">2</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">44</span>
+<span class="cline-any cline-yes">44</span>
+<span class="cline-any cline-yes">44</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-yes">25</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-yes">7</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">4</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-yes">3</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">270</span>
+<span class="cline-any cline-yes">42</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">228</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">228</span>
+<span class="cline-any cline-yes">8</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">220</span>
+<span class="cline-any cline-yes">220</span>
+<span class="cline-any cline-yes">220</span>
+<span class="cline-any cline-yes">427</span>
+<span class="cline-any cline-yes">16</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">204</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">290</span>
+<span class="cline-any cline-yes">290</span>
+<span class="cline-any cline-yes">290</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">//these are common models that must be hardcoded...
+//might want to modify later so that HERE it also takes in custom default values.
+&nbsp;
+//later on, this functions might become MUCH more complicated, because
+//cities are not necessarily one word entries
+&nbsp;
+var zipDict = require('./addressRefs/zips');
+var unitDesignators = require('./addressRefs/suffixes').unitDesignators;
+var streetSuffix = require('./addressRefs/suffixes').streetSuffix;
+&nbsp;
+var commonFunctions = function commonFunctions() {
+    functions = {
+        'cda_name': cda_name,
+        'cda_concept': cda_concept,
+        'cda_id': cda_id,
+        'cda_date': cda_date,
+        'cda_coded_entry': cda_coded_entry,
+        'cda_phone': cda_phone,
+        'cda_email': cda_email,
+        'cda_line_address': cda_line_address,
+        'cda_physical_quantity': cda_physical_quantity,
+        'currency': formatCurrency,
+        'ignore': ignoreValue
+    };
+    this.writeValue = writeValue;
+    this.getFunction = getFunction;
+    this.getValueType = getValueType;
+};
+&nbsp;
+///needs to be refactored later
+&nbsp;
+function cda_line_address(addressString) {
+    var addressObj = {
+        "use": "primary home",
+        "street_lines": [],
+        "city": "",
+        "state": "",
+        "zip": "",
+        "country": "United States" //assume U.S. for now
+    };
+    var addressArray = addressString.trim().split(',');
+    var uppCaseAdrStr = addressString.toUpperCase();
+    if (addressArray.length === 1) {
+        var tempArr = addressArray[0].split(' ');
+        //this goes from best method to worse
+        var foundWord;
+&nbsp;
+        //check if you can see a number from the last index, which means that's it's likely to be a p.o. box or an address
+&nbsp;
+        // 1. Obtain address from zip code.
+        /*
+         Also need to consider time complexity here, Notice that it maybe doing
+        a retrieval from a rather big object. I think it's okay since documentation
+        says that it's better than hashing, which is constant time lookup. May need
+        beter method later */
+&nbsp;
+        var fiveDigitZip = tempArr[tempArr.length - 1].substring(0, 5);
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (fiveDigitZip in zipDict &amp;&amp; <span class="branch-1 cbranch-no" title="branch not covered" >!isNaN(fiveDigitZip))</span> {
+<span class="cstat-no" title="statement not covered" >            var foundCity = zipDict[fiveDigitZip][0].trim();</span>
+<span class="cstat-no" title="statement not covered" >            var foundCityArr = foundCity.split(' ');</span>
+<span class="cstat-no" title="statement not covered" >            var foundCityMatch = '';</span>
+<span class="cstat-no" title="statement not covered" >            var foundCityIndex = -1;</span>
+<span class="cstat-no" title="statement not covered" >            for (var x = 0; x &lt; foundCityArr.length; x++) {</span>
+<span class="cstat-no" title="statement not covered" >                var tempCityIndex = addressString.toUpperCase().indexOf(foundCityArr[x]);</span>
+<span class="cstat-no" title="statement not covered" >                if (tempCityIndex &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                    if (foundCityIndex == -1) {</span>
+<span class="cstat-no" title="statement not covered" >                        foundCityIndex = tempCityIndex;</span>
+                    }
+<span class="cstat-no" title="statement not covered" >                    foundCityMatch += foundCityArr[x] + ' ';</span>
+                }
+            }
+<span class="cstat-no" title="statement not covered" >            foundCityMatch = foundCityMatch.substring(0, foundCityMatch.length - 1);</span>
+<span class="cstat-no" title="statement not covered" >            if (foundCityIndex &gt;= 1) {</span>
+<span class="cstat-no" title="statement not covered" >                var addressLine = addressString.substring(0, foundCityIndex - 1).trim();</span>
+<span class="cstat-no" title="statement not covered" >                addressObj.street_lines.push(addressLine);</span>
+                /*TODO: foundCIty, which is the city name obtained from looking up the
+                zip code table, needs to do something like an longest common substring match
+                in case there isn't a 1 to 1 match between the city names of the raw string
+                and foundCity. For now I'm just going to take the field in the dictionary. However,
+                the more correct approach would be running Ukkonen's algorithm for suffix trees
+                to find the longest common substring between the raw string and the value from
+                lookup. If the lcs algorithm is implemented correctly it should give O(m+n) time. */
+<span class="cstat-no" title="statement not covered" >                addressObj.city = foundCityMatch.trim();</span>
+<span class="cstat-no" title="statement not covered" >                addressObj.zip = tempArr[tempArr.length - 1].trim();</span>
+<span class="cstat-no" title="statement not covered" >                addressObj.state = tempArr[tempArr.length - 2].trim();</span>
+<span class="cstat-no" title="statement not covered" >                return addressObj;</span>
+            }
+        }
+        //2. try out commonly found suffixes
+        for (var x = tempArr.length - 1; x &gt; 0; x--) {
+            var word = tempArr[x].toUpperCase();
+            if (word in streetSuffix) {
+                streetFound = true;
+                foundWord = tempArr[x];
+                var cityBegIndex = addressString.indexOf(foundWord);
+                var cityEndIndex = cityBegIndex + foundWord.length;
+                var addressLine = addressString.substring(0, cityEndIndex).trim();
+                addressObj.street_lines.push(addressLine);
+&nbsp;
+                //These might not always be the last and second to last, what if there's just state code? need to make changes forthat later.
+                addressObj.zip = tempArr[tempArr.length - 1].trim();
+                addressObj.state = tempArr[tempArr.length - 2].trim();
+                //get city name
+                var zipIndex = addressString.indexOf(addressObj.zip);
+                var stateIndex = addressString.indexOf(addressObj.state);
+&nbsp;
+                addressObj.city = addressString.substring(cityEndIndex, stateIndex).trim();
+                return addressObj;
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        for (var x = tempArr.length - 1; x &gt; 0; x--) {</span>
+<span class="cstat-no" title="statement not covered" >            var word = tempArr[x].toUpperCase();</span>
+<span class="cstat-no" title="statement not covered" >            if (word in unitDesignators) {</span>
+<span class="cstat-no" title="statement not covered" >                streetFound = true;</span>
+<span class="cstat-no" title="statement not covered" >                foundWord = tempArr[x];</span>
+<span class="cstat-no" title="statement not covered" >                var cityBegIndex = addressString.indexOf(foundWord);</span>
+<span class="cstat-no" title="statement not covered" >                var cityEndIndex = cityBegIndex + foundWord.length;</span>
+<span class="cstat-no" title="statement not covered" >                var addressLine = addressString.substring(cityBegIndex, cityEndIndex).trim();</span>
+<span class="cstat-no" title="statement not covered" >                addressObj.street_lines.push(addressLine);</span>
+&nbsp;
+                //These might not always be the last and second to last
+<span class="cstat-no" title="statement not covered" >                addressObj.zip = tempArr[tempArr.length - 1].trim();</span>
+<span class="cstat-no" title="statement not covered" >                addressObj.state = tempArr[tempArr.length - 2].trim();</span>
+                //get city name
+<span class="cstat-no" title="statement not covered" >                var zipIndex = addressString.indexOf(addressObj.zip);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                addressObj.city = addressString.substring(cityEndIndex, zipIndex).trim();</span>
+<span class="cstat-no" title="statement not covered" >                return addressObj;</span>
+            }
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered" >        return null;</span>
+    }
+&nbsp;
+    /*case when there is only one comma, right after the city , ie. 1111 Address Dr Hoosville, VA 11111*/
+    else if (addressArray.length === 2) {
+        var streetAndCity = addressArray[0].trim();
+        var stateAndZip = addressArray[1].trim();
+&nbsp;
+        var test = false;
+        var streetFound = false;
+        var street;
+        var city;
+&nbsp;
+        //try to figure out street and city, going for fastest computation to slowest
+&nbsp;
+        var streetArray = streetAndCity.split(" ");
+&nbsp;
+        /*the whole point of this code is to find the point where we need to split the
+        string */
+&nbsp;
+        //find longest worded us city
+&nbsp;
+        //this is the default breaking point
+        var breakPoint = streetAndCity.lastIndexOf(' ');
+        var foundWord;
+&nbsp;
+        //check if you can see a number from the last index, which means that's it's likely to be a p.o. box or an address
+&nbsp;
+        //First, check if the beginning token is a word if it's a word, then it's likely to be a PO box
+        if (isNaN(streetArray[0])) {
+            for (var x = streetArray.length; x &gt; 0; x--) {
+                /* NOTE: the &gt; 0 IS NOT A MISTAKE! Address lines usually start with a number so we don't want the loop
+                to go all the way through */
+                if (!isNaN(streetArray[x])) { //so it is a number
+                    streetFound = true;
+                    foundWord = streetArray[x];
+                    breakPoint = streetAndCity.indexOf(foundWord) + foundWord.length;
+                    //console.log(streetAndCity.substring(0, breakPoint));
+                }
+&nbsp;
+            }
+        }
+        //means that we do start with a street number, and need to look for a common suffix
+        else {
+&nbsp;
+            /*The stop index is where looping should stop in an address. The reason why
+            5 is used is because the longest worded city is 5 words long. */
+            //loop only to the 2nd to last word, i.e. 7777 blah blah STOP city, ST 99999
+            <span class="missing-if-branch" title="else path not taken" >E</span>if (!streetFound) {
+                for (var x = 0; x &lt; streetArray.length - 1; x++) {
+                    var word = streetArray[x].toUpperCase();
+                    if (word in streetSuffix) {
+                        streetFound = true;
+                        foundWord = streetArray[x];
+                        breakPoint = streetAndCity.indexOf(foundWord) + foundWord.length;
+                        break;
+                    }
+                }
+            }
+&nbsp;
+            //go through the string and look up usps C2 suffix address, unit designators
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (!streetFound) {
+&nbsp;
+<span class="cstat-no" title="statement not covered" >                for (var x = 0; x &gt; streetArray.length; x++) {</span>
+<span class="cstat-no" title="statement not covered" >                    var word = streetArray[x].toUpperCase();</span>
+<span class="cstat-no" title="statement not covered" >                    if (word in unitDesignators) {</span>
+<span class="cstat-no" title="statement not covered" >                        streetFound = true;</span>
+<span class="cstat-no" title="statement not covered" >                        foundWord = streetArray[x];</span>
+<span class="cstat-no" title="statement not covered" >                        breakPoint = streetAndCity.indexOf(foundWord) + foundWord.length;</span>
+<span class="cstat-no" title="statement not covered" >                        test = true;</span>
+<span class="cstat-no" title="statement not covered" >                        break;</span>
+                    }
+                }
+            }
+            //last major option, lookup the 5 letter zip code, then do a match on the address string
+            //with the obtained value.
+            <span class="missing-if-branch" title="if path not taken" >I</span>if (!streetFound) {
+<span class="cstat-no" title="statement not covered" >                var stateAndZipArr = stateAndZip.split(' ');</span>
+<span class="cstat-no" title="statement not covered" >                var zip = stateAndZipArr[1].trim().substring(0, 5);</span>
+<span class="cstat-no" title="statement not covered" >                if (zip in zipDict &amp;&amp; !isNaN(zip)) {</span>
+<span class="cstat-no" title="statement not covered" >                    var cityRetrieved = zipDict[zip][0].trim();</span>
+<span class="cstat-no" title="statement not covered" >                    var cityArr = cityRetrieved.split(" ");</span>
+<span class="cstat-no" title="statement not covered" >                    var capAdrString = addressString.toUpperCase();</span>
+<span class="cstat-no" title="statement not covered" >                    var possibleBreakPoint = -1;</span>
+<span class="cstat-no" title="statement not covered" >                    for (var x = 0; x &lt; cityArr.length; x++) {</span>
+<span class="cstat-no" title="statement not covered" >                        var tempCityIndex = addressString.toUpperCase().indexOf(cityArr[x]);</span>
+<span class="cstat-no" title="statement not covered" >                        if (tempCityIndex &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                            if (foundCityIndex == -1) {</span>
+<span class="cstat-no" title="statement not covered" >                                foundCityIndex = tempCityIndex;</span>
+                            }
+&nbsp;
+                        }
+                    }
+                }
+&nbsp;
+            }
+&nbsp;
+        }
+&nbsp;
+        // this step is taken for all procedures, the above code is to find the right point to split the stirng(breakpoint)
+        street = streetAndCity.substring(0, breakPoint);
+        city = streetAndCity.substring(breakPoint + 1, streetAndCity.length);
+        //state and zip are consistent
+        stateAndZip = stateAndZip.split(' ');
+        var state = stateAndZip[0];
+        var zip = stateAndZip[1];
+        addressObj.street_lines.push(street);
+        addressObj.city = city;
+        addressObj.state = state;
+        addressObj.zip = zip;
+&nbsp;
+        return addressObj;
+    }
+    /*ie. 1111 Address Dr, Hoosville, VA 11111*/
+    else <span class="missing-if-branch" title="else path not taken" >E</span>if (addressArray.length === 3) {
+        addressObj.street_lines[0] = addressArray[0].trim();
+        addressObj.city = addressArray[1].trim();
+        var stateAndZip = addressArray[2].trim().split(' ');
+        addressObj.state = stateAndZip[0];
+        addressObj.zip = stateAndZip[1];
+        return addressObj;
+    }
+<span class="cstat-no" title="statement not covered" >    return null;</span>
+}
+&nbsp;
+function cda_phone(numberString, type) {
+    var phoneObj = {};
+    phoneObj.number = numberString;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (arguments.length &gt; 1) {
+<span class="cstat-no" title="statement not covered" >        phoneObj.type = type;</span>
+    } else {
+        phoneObj.type = 'primary home';
+    }
+    return phoneObj;
+}
+&nbsp;
+function cda_email(emailString, type) {
+    var emailObj = {};
+    emailObj.address = emailString;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (arguments.length &gt; 1) {
+<span class="cstat-no" title="statement not covered" >        emailObj.type = type;</span>
+    } else {
+        emailObj.type = '';
+    }
+    return emailObj;
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function cda_concept() {</span>}
+&nbsp;
+function cda_id(id, extension) {
+    var obj = {};
+    obj.identifier = id;
+    if (arguments.length &gt; 1) {
+        obj.extension = extension;
+    }
+    return obj;
+}
+&nbsp;
+function cda_date(dateString, precision) {
+    var dateObj;
+    var date;
+    var dateNum;
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (arguments.length == 2) {
+<span class="cstat-no" title="statement not covered" >        dateObj = {};</span>
+<span class="cstat-no" title="statement not covered" >        date = new Date(dateString);</span>
+<span class="cstat-no" title="statement not covered" >        dateNum = date.getTime() - date.getTimezoneOffset() * 60000;</span>
+<span class="cstat-no" title="statement not covered" >        date.setTime(dateNum);</span>
+        //TODO: don't need milliseconds precision here
+<span class="cstat-no" title="statement not covered" >        dateObj.date = date.toISOString();</span>
+<span class="cstat-no" title="statement not covered" >        dateObj.precision = precision;</span>
+<span class="cstat-no" title="statement not covered" >        return dateObj;</span>
+    } else {
+        dateObj = {};
+        date = new Date(dateString);
+        dateNum = date.getTime() - date.getTimezoneOffset() * 60000;
+        date.setTime(dateNum);
+        dateObj.date = date.toISOString();
+        dateObj.precision = determineDatePrecision(dateString);
+        return dateObj;
+    }
+&nbsp;
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function cda_physical_quantity(value, unit) {</span>
+<span class="cstat-no" title="statement not covered" >    var obj = {};</span>
+<span class="cstat-no" title="statement not covered" >    obj.value = value;</span>
+<span class="cstat-no" title="statement not covered" >    obj.unit = unit;</span>
+<span class="cstat-no" title="statement not covered" >    return obj;</span>
+}
+&nbsp;
+function determineDatePrecision(dateString) {
+&nbsp;
+    //think about it when it's only a year
+    var date;
+    var yearMonthDay = dateString.substr(0, dateString.indexOf(' ')); // '72'
+    var hourMinutes = dateString.substr(dateString.indexOf(' ') + 1);
+    hourMinutes = hourMinutes.trim();
+    //start from the order the hour
+    //time is not defined
+    if (hourMinutes !== undefined &amp;&amp; dateString.indexOf(' ') &gt;= 0) {
+        //determine month, day, etc
+        //splits to hh:mm, (A.M. or P.M.)
+        date = new Date(dateString);
+&nbsp;
+        var minutes = date.getMinutes();
+        if (minutes &gt; 0) {
+            return 'minute';
+        } else <span class="missing-if-branch" title="else path not taken" >E</span>if (minutes === 0) {
+            return 'hour';
+        }
+<span class="cstat-no" title="statement not covered" >        return 'hour';</span>
+    } else {
+        var yearMonthDayArray = dateString.split('/');
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (yearMonthDayArray.length === 3) {
+            return 'day';
+        }
+<span class="cstat-no" title="statement not covered" >        if (yearMonthDayArray.length === 2) {</span>
+<span class="cstat-no" title="statement not covered" >            return 'month';</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (yearMonthDayArray.length === 1) {</span>
+<span class="cstat-no" title="statement not covered" >            return 'year';</span>
+        }
+    }
+    //if all those cases don't hold, then it's likely that it's a year.
+<span class="cstat-no" title="statement not covered" >    return 'year';</span>
+}
+&nbsp;
+/* Not in use at the moment, may be useful later.
+function processMoney(moneyString){
+&nbsp;
+    moneyString = moneyString.trim();
+    if(moneyString.indexOf('$') &gt;=0){
+        moneyString = moneyString.substring(moneyString.indexOf('$') + 1, moneyString.length);
+        console.log(moneyString);
+    }
+    var dollarAmt = new Number(moneyString);
+    console.log(dollarAmt);
+    return dollarAmt;
+}
+*/
+&nbsp;
+function cda_name(name) {
+    //this needs to be edited later to include prefixes
+    var cdaNameObj = {};
+    var nameArray;
+    //assuming that string is in last_name, first_name (middle name format)
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (name.indexOf(",") &gt;= 0) {
+<span class="cstat-no" title="statement not covered" >        nameArray = name.split(",");</span>
+<span class="cstat-no" title="statement not covered" >        cdaNameObj.last = nameArray[0].trim();</span>
+<span class="cstat-no" title="statement not covered" >        var firstAndMiddleArr = nameArray[1].trim().split(" ");</span>
+&nbsp;
+        //assuming first names can be more than one word
+<span class="cstat-no" title="statement not covered" >        var middleNameArr = [];</span>
+<span class="cstat-no" title="statement not covered" >        cdaNameObj.first = firstAndMiddleArr[0].trim();</span>
+<span class="cstat-no" title="statement not covered" >        for (var x = 1; x &lt; firstAndMiddleArr.length; x++) {</span>
+<span class="cstat-no" title="statement not covered" >            middleNameArr.push(firstAndMiddleArr[x].trim());</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (middleNameArr.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >            cdaNameObj.middle = middleNameArr;</span>
+        }
+    } else {
+        nameArray = name.split(" ");
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (nameArray.length == 2) {
+            cdaNameObj.first = nameArray[0];
+            cdaNameObj.last = nameArray[1];
+        } else <span class="cstat-no" title="statement not covered" >if (nameArray.length &gt; 2) {</span>
+<span class="cstat-no" title="statement not covered" >            cdaNameObj.first = nameArray[0];</span>
+<span class="cstat-no" title="statement not covered" >            var middleNameArr = [];</span>
+<span class="cstat-no" title="statement not covered" >            for (var x = 1; x &lt; nameArray.length - 1; x++) {</span>
+<span class="cstat-no" title="statement not covered" >                middleNameArr.push(nameArray[x]);</span>
+            }
+<span class="cstat-no" title="statement not covered" >            if (middleNameArr.length &gt; 0) {</span>
+<span class="cstat-no" title="statement not covered" >                cdaNameObj.middle = middleNameArr;</span>
+            }
+<span class="cstat-no" title="statement not covered" >            cdaNameObj.last = nameArray[nameArray.length - 1];</span>
+        }
+    }
+    return cdaNameObj;
+}
+&nbsp;
+function cda_coded_entry(name, code, codeSystem) {
+    var cdaCodedEntry = {};
+&nbsp;
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof name === 'string' || <span class="branch-1 cbranch-no" title="branch not covered" >name instanceof String)</span> {
+        if (name.length &gt; 0) {
+            cdaCodedEntry.name = name;
+        }
+    }
+    if (typeof codeSystem === 'string' || codeSystem instanceof String) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (codeSystem.length &gt; 0) {
+<span class="cstat-no" title="statement not covered" >            cdaCodedEntry.codeSystem = codeSystem;</span>
+        }
+    }
+    if (typeof code === 'string' || code instanceof String) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (code.length &gt; 0) {
+            cdaCodedEntry.code = code;
+        }
+    }
+&nbsp;
+    return cdaCodedEntry;
+}
+&nbsp;
+<span class="fstat-no" title="function not covered" >function getValueType(objValue) {</span>
+<span class="cstat-no" title="statement not covered" >    if (objValue instanceof Array) {</span>
+<span class="cstat-no" title="statement not covered" >        return [];</span>
+    } else <span class="cstat-no" title="statement not covered" >if (typeof (objValue) == 'string') {</span>
+<span class="cstat-no" title="statement not covered" >        if (objValue.charAt(0) == '[') {</span>
+<span class="cstat-no" title="statement not covered" >            return [];</span>
+        }
+<span class="cstat-no" title="statement not covered" >        if (objValue.charAt(0) == "{") {</span>
+<span class="cstat-no" title="statement not covered" >            return {};</span>
+        }
+    } else <span class="cstat-no" title="statement not covered" >if (typeof (objValue) === 'object' &amp;&amp; objValue instanceof Array)</span>
+<span class="cstat-no" title="statement not covered" >        return {};</span>
+}
+&nbsp;
+function writeValue(value, obj, key) {
+    var objValue = obj[key];
+    if (objValue instanceof Array) {
+        objValue.push(value);
+    } else <span class="missing-if-branch" title="else path not taken" >E</span>if (typeof (objValue) == 'string') {
+        obj[key] = value;
+    } else <span class="cstat-no" title="statement not covered" >if (typeof (objValue) === 'object' &amp;&amp; objValue instanceof Array)</span>
+<span class="cstat-no" title="statement not covered" >        obj[key] = value;</span>
+}
+//this function ignores all not avaliable value fields
+&nbsp;
+function ignoreValue(value) {
+    if (value === null || value === undefined || value.length === 0) {
+        return true;
+    }
+    <span class="missing-if-branch" title="if path not taken" >I</span>if (value.length === 0) {
+<span class="cstat-no" title="statement not covered" >        return true;</span>
+    }
+    if (typeof (value) === 'object') {
+        return false;
+    }
+    value = value.toLowerCase();
+    var ignoreValues = ['not available', 'no information'];
+    for (var x = 0; x &lt; ignoreValues.length; x++) {
+        if (value.indexOf(ignoreValues[x]) &gt;= 0) {
+            return true;
+        }
+    }
+    return false;
+}
+&nbsp;
+function getFunction(commonModelName) {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (commonModelName in functions) {
+        <span class="missing-if-branch" title="else path not taken" >E</span>if (functions[commonModelName] !== null) {
+            return functions[commonModelName];
+        }
+    }
+<span class="cstat-no" title="statement not covered" >    return null;</span>
+}
+&nbsp;
+//will be implemented later
+&nbsp;
+<span class="fstat-no" title="function not covered" >function formatCurrency(currencyString) {</span>}
+&nbsp;
+commonFunctions.instance = null;
+&nbsp;
+commonFunctions.getInstance = function () {
+    <span class="missing-if-branch" title="else path not taken" >E</span>if (this.instance === null) {
+        this.instance = new commonFunctions();
+    }
+    return this.instance;
+}
+&nbsp;
+module.exports = commonFunctions.getInstance();
+&nbsp;</pre></td></tr>
+</table></pre>
+
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="http://istanbul-js.org/" target="_blank">istanbul</a> at Fri Aug 15 2014 11:50:51 GMT-0400 (EDT)</div>
+</div>
+
+<script src="../../../../../prettify.js"></script>
+
+<script src="https://yui-s.yahooapis.com/3.6.0/build/yui/yui-min.js"></script>
+<script>
+
+    YUI().use('datatable', function (Y) {
+
+        var formatters = {
+          pct: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              try {
+                  return o.value.toFixed(2) + '%';
+              } catch (ex) { return o.value + '%'; }
+          },
+          html: function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.record.get(o.column.key + '_html');
+          }
+        },
+          defaultFormatter = function (o) {
+              o.className += o.record.get('classes')[o.column.key];
+              return o.value;
+          };
+
+        function getColumns(theadNode) {
+            var colNodes = theadNode.all('tr th'),
+                cols = [],
+                col;
+            colNodes.each(function (colNode) {
+                col = {
+                    key: colNode.getAttribute('data-col'),
+                    label: colNode.get('innerHTML') || ' ',
+                    sortable: !colNode.getAttribute('data-nosort'),
+                    className: colNode.getAttribute('class'),
+                    type: colNode.getAttribute('data-type'),
+                    allowHTML: colNode.getAttribute('data-html') === 'true' || colNode.getAttribute('data-fmt') === 'html'
+                };
+                col.formatter = formatters[colNode.getAttribute('data-fmt')] || defaultFormatter;
+                cols.push(col);
+            });
+            return cols;
+        }
+
+        function getRowData(trNode, cols) {
+            var tdNodes = trNode.all('td'),
+                    i,
+                    row = { classes: {} },
+                    node,
+                    name;
+            for (i = 0; i < cols.length; i += 1) {
+                name = cols[i].key;
+                node = tdNodes.item(i);
+                row[name] = node.getAttribute('data-value') || node.get('innerHTML');
+                row[name + '_html'] = node.get('innerHTML');
+                row.classes[name] = node.getAttribute('class');
+                //Y.log('Name: ' + name + '; Value: ' + row[name]);
+                if (cols[i].type === 'number') { row[name] = row[name] * 1; }
+            }
+            //Y.log(row);
+            return row;
+        }
+
+        function getData(tbodyNode, cols) {
+            var data = [];
+            tbodyNode.all('tr').each(function (trNode) {
+                data.push(getRowData(trNode, cols));
+            });
+            return data;
+        }
+
+        function replaceTable(node) {
+            if (!node) { return; }
+            var cols = getColumns(node.one('thead')),
+                data = getData(node.one('tbody'), cols),
+                table,
+                parent = node.get('parentNode');
+
+            table = new Y.DataTable({
+                columns: cols,
+                data: data,
+                sortBy: 'file'
+            });
+            parent.set('innerHTML', '');
+            table.render(parent);
+        }
+
+        Y.on('domready', function () {
+            replaceTable(Y.one('div.coverage-summary table'));
+            if (typeof prettyPrint === 'function') {
+                prettyPrint();
+            }
+        });
+    });
+</script>
+</body>
+</html>
