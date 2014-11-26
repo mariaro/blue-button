@@ -37,7 +37,8 @@
     "underscore": "1.6.x",
     "winston": "^0.7.3",
     "xdate": "*",
-    "z-schema": "^2.4.8"
+    "z-schema": "^2.4.8",
+    "moment" : "~2.8.2"
   },
   "devDependencies": {
     "assert": "1.1.x",
