@@ -1,5 +1,5 @@
 var walk = require("walk");
-var libxmljs = require("libxmljs");
+var libxmljs = require("libxslt").libxmljs;
 var fs = require("fs");
 
 var meta = require("blue-button-meta");
@@ -47,12 +47,12 @@ function explore(path){
                 //var d = bb.parseXml(r, {component:"ccda_results"}); //errors: 119
 
                 //var d = bb.parseXml(r); //errors: 346
-                
+
                 //console.log(d);
 
 
                 /*
-                    var xmlDoc = libxmljs.parseXmlString(data.toString());
+                    var xmlDoc = libxmljs.parseXml(data.toString());
                     //var section = xmlDoc.get('//h:component[h:section/h:templateId/@root="2.16.840.1.113883.10.20.22.2.4"]', DEFAULT_NS);
                     for (item in meta.templates) {
                         var templates = xmlDoc.get('/h:ClinicalDocument/h:templateId[@root="'+meta.templates[item]["templateId"]+'"]', DEFAULT_NS);

@@ -198,18 +198,18 @@
 <div class="header low">
     <h1>Code coverage report for <span class="entity">blue-button/lib/generator/ccda/generator.js</span></h1>
     <h2>
-        
+
         Statements: <span class="metric">17.65% <small>(9 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        
-        
+
+
         Branches: <span class="metric">0% <small>(0 / 32)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        
-        
+
+
         Functions: <span class="metric">0% <small>(0 / 2)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        
-        
+
+
         Lines: <span class="metric">17.65% <small>(9 / 51)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        
+
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../index.html">All files</a> &#187; <a href="index.html">blue-button/lib/generator/ccda/</a> &#187; generator.js</div>
@@ -511,9 +511,9 @@
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-yes">1</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">/*
-This script converts CCDA data in JSON format (originally generated from a Continuity of Care Document (CCD) in 
-standard XML/CCDA format) back to XML/CCDA format. The script determines the 
-section template to which the data belongs to by matching on its object properties (the determineSection function). 
+This script converts CCDA data in JSON format (originally generated from a Continuity of Care Document (CCD) in
+standard XML/CCDA format) back to XML/CCDA format. The script determines the
+section template to which the data belongs to by matching on its object properties (the determineSection function).
 &nbsp;
 Two different functions allow for the upload of data that belongs only to a single section, or data for all sections
 in a CCD-A document (gen() vs. genWholeCCDA()). This aids in unit testing the individual sections for accuracy, even though
@@ -526,13 +526,13 @@ In the case of compiling a whole CCD-A document, these individual sections are s
 document.
 */
 &nbsp;
-var libxmljs = require("libxmljs");
+var libxmljs = require("libxslt").libxmljs;
 var libCCDAGen = require("./lib/templating_functions.js");
 var bbm = require('blue-button-meta');
 // maps code systems names to code system IDs
-var codeSystems = bbm.CCDA.codeSystems; 
+var codeSystems = bbm.CCDA.codeSystems;
 &nbsp;
-// Map section number to section name. 
+// Map section number to section name.
 var sectionNames = {
     0: "null",
     1: "demographics",
@@ -550,7 +550,7 @@ var sectionNames = {
 }
 &nbsp;
 /*
-Generates CCD-A from JSON data. 
+Generates CCD-A from JSON data.
 @data is the data for a specific CCD section.
 @CCD boolean parameteres indicating if it is an entire CCD or only individual section
 @xmlDoc the previously generated CCDA/XML if generating an entire CCD
@@ -591,7 +591,7 @@ var gen = <span class="fstat-no" title="function not covered" >function (data, C
 &nbsp;
 /*
 Generates an entire CCD-A document. Uses gen() to string together the individual CCD-A sections. First, it generates
-the CCD-A header, then iterates through all the section templates, stringing them 
+the CCD-A header, then iterates through all the section templates, stringing them
 together one after another.
 &nbsp;
 @data the entire CCD-A JSON data to be converted to XML/CCDA
@@ -603,7 +603,7 @@ var genWholeCCDA = <span class="fstat-no" title="function not covered" >function
 &nbsp;
 <span class="cstat-no" title="statement not covered" >    var doc = new libxmljs.Document();</span>
 &nbsp;
-    // generate the header 
+    // generate the header
 <span class="cstat-no" title="statement not covered" >    var xmlDoc = doc.node('ClinicalDocument')</span>
             .attr({"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"})
             .attr({xmlns: "urn:hl7-org:v3"})
@@ -633,7 +633,7 @@ var genWholeCCDA = <span class="fstat-no" title="function not covered" >function
 <span class="cstat-no" title="statement not covered" >                xmlDoc = gen(data[sectionNames[1]], true, xmlDoc, sectionNames[1]);</span>
 <span class="cstat-no" title="statement not covered" >            xmlDoc = xmlDoc.parent() // end patientRole</span>
         .parent() // end recordTarget
-    
+
     // count the number of sections defined
 <span class="cstat-no" title="statement not covered" >    var count_sections = 0;</span>
 <span class="cstat-no" title="statement not covered" >    for (sections in data) {</span>

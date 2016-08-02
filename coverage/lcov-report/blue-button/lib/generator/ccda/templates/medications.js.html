@@ -198,18 +198,18 @@
 <div class="header high">
     <h1>Code coverage report for <span class="entity">blue-button/lib/generator/ccda/templates/medications.js</span></h1>
     <h2>
-        
+
         Statements: <span class="metric">100% <small>(29 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        
-        
+
+
         Branches: <span class="metric">61.11% <small>(11 / 18)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        
-        
+
+
         Functions: <span class="metric">100% <small>(1 / 1)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        
-        
+
+
         Lines: <span class="metric">100% <small>(29 / 29)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
-        
+
         Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
     </h2>
     <div class="path"><a href="../../../../../index.html">All files</a> &#187; <a href="index.html">blue-button/lib/generator/ccda/templates/</a> &#187; medications.js</div>
@@ -822,7 +822,7 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var libxmljs = require("libxmljs");
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">var libxmljs = require("libxslt").libxmljs;
 var libCCDAGen = require("../lib/templating_functions.js");
 &nbsp;
 module.exports = function (data, codeSystems, isCCD, CCDxml) {
@@ -896,10 +896,10 @@ module.exports = function (data, codeSystems, isCCD, CCDxml) {
             "assignedP": undefined,
             "templateId_in": undefined
         });
-        // xmlDoc = libCCDAGen.participant(xmlDoc, undefined, {"code": 1, "playingEntity": {"code": 1, "name": 1}, 
-        //     "typeCode": "CSM", "classCode": "MANU", "tId": "2.16.840.1.113883.10.20.22.4.24", 
-        //     "code": {"code": "412307009", "name": "drug vehicle", "codeSystem": "2.16.840.1.113883.6.96"}, 
-        //     "playingEntity": {"code": {"code": "324049", "name": "Aerosol", "codeSystem": "2.16.840.1.113883.6.88", "codeSystemName": "RxNorm"}}, 
+        // xmlDoc = libCCDAGen.participant(xmlDoc, undefined, {"code": 1, "playingEntity": {"code": 1, "name": 1},
+        //     "typeCode": "CSM", "classCode": "MANU", "tId": "2.16.840.1.113883.10.20.22.4.24",
+        //     "code": {"code": "412307009", "name": "drug vehicle", "codeSystem": "2.16.840.1.113883.6.96"},
+        //     "playingEntity": {"code": {"code": "324049", "name": "Aerosol", "codeSystem": "2.16.840.1.113883.6.88", "codeSystemName": "RxNorm"}},
         //     "name": "Aerosol"});
 &nbsp;
         xmlDoc = xmlDoc.node('participant').attr({
