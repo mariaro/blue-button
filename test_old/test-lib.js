@@ -31,7 +31,7 @@ var gen = require('../lib/generator/ccda/generator.js'); // to parse a single se
 var XmlDOM = require('xmldom').DOMParser;
 var run = require('execSync').exec;
 var bb = require("../index.js");
-var libxmljs = require('libxmljs');
+var libxmljs = require('libxslt').libxmljs;
 
 // Flags
 var SKIP = false; // if true prompts tester with choice to skip failing assertion, otherwise continues

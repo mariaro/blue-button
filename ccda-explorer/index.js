@@ -52,7 +52,7 @@ function explore(path){
 
 
                 /*
-                    var xmlDoc = libxmljs.parseXml(data.toString());
+                    var xmlDoc = libxmljs.parseXmlString(data.toString());
                     //var section = xmlDoc.get('//h:component[h:section/h:templateId/@root="2.16.840.1.113883.10.20.22.2.4"]', DEFAULT_NS);
                     for (item in meta.templates) {
                         var templates = xmlDoc.get('/h:ClinicalDocument/h:templateId[@root="'+meta.templates[item]["templateId"]+'"]', DEFAULT_NS);
