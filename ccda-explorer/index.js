@@ -1,5 +1,5 @@
 var walk = require("walk");
-var libxmljs = require("libxmljs");
+var libxmljs = require("libxslt").libxmljs;
 var fs = require("fs");
 
 var meta = require("blue-button-meta");
